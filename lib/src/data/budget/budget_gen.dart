@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../core/enum/transaction_type.dart';
 import '../../domain/expense/entities/expense.dart';
 import '../../presentation/widgets/budget.dart';
 import '../category/model/category_model.dart';
@@ -17,7 +18,7 @@ List<Budget> generateNewBudgets(List<Expense> expenses, double totalIncome,
   // Define categories and allocation percentages for the budgets
   List<Category> budgetCategories = allCategories
       .where((category) => category.isBudget)
-      .map((category) => Category(category, category.budget!))
+      .map((category) => Category(category as List<String>, category.budget!))
       .toList();
 
   // Calculate the sum of allocation percentages
