@@ -53,17 +53,17 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
     }
-    flavorDimensions "app"
-    productFlavors {
-        dev {
-            dimension "app"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
-        }
-        prod {
-            dimension "app"
-        }
-    }
+    // flavorDimensions "app"
+    // productFlavors {
+    //     dev {
+    //         dimension "app"
+    //         applicationIdSuffix ".dev"
+    //         versionNameSuffix "-dev"
+    //     }
+    //     prod {
+    //         dimension "app"
+    //     }
+    // }
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']

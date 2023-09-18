@@ -8,29 +8,17 @@
             "name": "Paisa - Dev",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "dev",
-            ]
         },
         {
             "name": "Paisa - Prod",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "prod",
-            ]
         },
         {
             "name": "Paisa - Dev (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
-            "args": [
-                "--flavor",
-                "dev",
-            ]
         },
     ]
 }

@@ -49,7 +49,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - permission_handler_apple (9.0.4):
+  - permission_handler_apple (9.1.1):
     - Flutter
   - quick_actions_ios (0.0.1):
     - Flutter
@@ -123,9 +123,9 @@ SPEC CHECKSUMS:
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
   local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
-  quick_actions_ios: bb09d1c35b4a89f9dbb15487039fa1b983ca375e
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+  quick_actions_ios: 9e80dcfadfbc5d47d9cf8f47bcf428b11cf383d4
   SDWebImage: 9c36e66c8ce4620b41a7407698dda44211a96764
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
