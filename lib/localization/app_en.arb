@@ -41,6 +41,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "reports": "Reports",
+    "@reports": {
+        "description": "Accounts text shown in the bottom navigation or drawer widget",
+        "type": "text",
+        "placeholders": {}
+    },
     "overview": "Overview",
     "@overview": {
         "description": "Accounts text shown in the bottom navigation or drawer widget",

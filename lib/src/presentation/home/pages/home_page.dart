@@ -54,6 +54,11 @@ class LandingPage extends StatelessWidget {
         selectedIcon: const Icon(MdiIcons.timetable),
       ),
       Destination(
+        label: context.loc.reports,
+        icon: const Icon(MdiIcons.fileDocument),
+        selectedIcon: const Icon(MdiIcons.fileDocument),
+      ),
+      Destination(
         label: context.loc.recurring,
         icon: const Icon(MdiIcons.cashSync),
         selectedIcon: const Icon(MdiIcons.cashSync),

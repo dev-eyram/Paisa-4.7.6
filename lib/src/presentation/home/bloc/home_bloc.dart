@@ -36,6 +36,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return PageType.budget;
       case 6:
         return PageType.recurring;
+      case 7:
+        return PageType.reports;
       case 0:
       default:
         return PageType.home;
