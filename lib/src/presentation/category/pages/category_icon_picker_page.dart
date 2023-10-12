@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/widgets/paisa_card.dart';
+import 'package:sika_purse/src/presentation/widgets/sika_purse_card.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_icon_picker.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
+import '../../widgets/sika_purse_icon_picker.dart';
 
 class CategoryIconPickerPage extends StatefulWidget {
   const CategoryIconPickerPage({super.key});
@@ -20,7 +20,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final map = paisaIconMap.entries.toList();
+    final map = sikaPurseIconMap.entries.toList();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -30,9 +30,9 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
             icon: const Icon(Icons.close)),
         title: Text(context.loc.chooseIcon),
         actions: [
-          PaisaTextButton(
+          SikaPurseTextButton(
             onPressed: () {
-              paisaIconPicker(
+              sikaPurseIconPicker(
                 context: context,
                 defaultIcon: selectedIcon!,
               ).then((resultIcon) => selectedIcon = resultIcon);
@@ -44,7 +44,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: PaisaBigButton(
+          child: SikaPurseBigButton(
             onPressed: () {
               GoRouter.of(context).pop(selectedIcon);
             },
@@ -57,7 +57,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           final iconData = map[index];
-          return PaisaFilledCard(
+          return SikaPurseFilledCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -67,8 +67,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                     horizontal: 16,
                     vertical: 0,
                   ),
-                  visualDensity:
-                      const VisualDensity(horizontal: 0, vertical: -3),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -3),
                   title: Text(
                     iconData.key,
                     style: GoogleFonts.outfit(
@@ -88,8 +87,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                     childAspectRatio: 1 / 1,
                   ),
                   itemBuilder: (context, index) {
-                    final bool isSelected =
-                        selectedIcon == iconData.value[index];
+                    final bool isSelected = selectedIcon == iconData.value[index];
                     return Container(
                       margin: const EdgeInsets.all(4),
                       decoration: isSelected
@@ -104,9 +102,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
                       child: IconButton(
                         iconSize: 30,
                         key: ValueKey(iconData.value[index].hashCode),
-                        color: isSelected
-                            ? context.primary
-                            : Theme.of(context).iconTheme.color,
+                        color: isSelected ? context.primary : Theme.of(context).iconTheme.color,
                         onPressed: () {
                           setState(() {
                             selectedIcon = iconData.value[index];
@@ -126,7 +122,7 @@ class _CategoryIconPickerPageState extends State<CategoryIconPickerPage> {
   }
 }
 
-final paisaIconMap = {
+final sikaPurseIconMap = {
   "Animal": [
     MdiIcons.butterfly,
     MdiIcons.cat,

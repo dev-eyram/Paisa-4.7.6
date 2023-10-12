@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/common.dart';
 
-Future<int> paisaColorPicker(
+Future<int> sikaPurseColorPicker(
   BuildContext context, {
   int defaultColor = 0xFFF44336,
 }) async {
@@ -17,8 +17,7 @@ Future<int> paisaColorPicker(
       ),
     ),
     constraints: BoxConstraints(
-      maxWidth:
-          MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
+      maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
     ),
     builder: (context) => Padding(
       padding: const EdgeInsets.all(8.0),

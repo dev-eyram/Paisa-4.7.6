@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Paisa - Dev",
+            "name": "Sika Purse - Dev",
             "request": "launch",
             "type": "dart",
         },
         {
-            "name": "Paisa - Prod",
+            "name": "Sika Purse - Prod",
             "request": "launch",
             "type": "dart",
         },
         {
-            "name": "Paisa - Dev (profile mode)",
+            "name": "Sika Purse - Dev (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",

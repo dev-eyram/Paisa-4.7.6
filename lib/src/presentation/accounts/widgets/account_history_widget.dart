@@ -6,7 +6,7 @@ import '../../../core/enum/filter_expense.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/expense_month_card.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 
 class AccountHistoryWidget extends StatelessWidget {
   const AccountHistoryWidget({
@@ -30,8 +30,7 @@ class AccountHistoryWidget extends StatelessWidget {
       return ValueListenableBuilder<FilterExpense>(
         valueListenable: summaryController.sortHomeExpenseNotifier,
         builder: (_, value, __) {
-          final maps = groupBy(
-              expenses, (Expense element) => element.time.formatted(value));
+          final maps = groupBy(expenses, (Expense element) => element.time.formatted(value));
           return ListView.separated(
             separatorBuilder: (context, index) => const Divider(),
             shrinkWrap: true,

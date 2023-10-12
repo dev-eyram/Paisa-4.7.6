@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/extensions/filter_expense_extension.dart';
+import 'package:sika_purse/src/core/extensions/filter_expense_extension.dart';
+import 'package:sika_purse/src/core/theme/color_extension.dart';
 import '../../summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../settings/bloc/settings_controller.dart';
-import '../paisa_pill_chip.dart';
-import '../paisa_toggle_button.dart';
+import '../sika_purse_pill_chip.dart';
+import '../sika_purse_toggle_button.dart';
 
 class FilterBudgetToggleWidget extends StatelessWidget {
   const FilterBudgetToggleWidget({
@@ -43,8 +43,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                 ),
                 Container(
                   clipBehavior: Clip.antiAlias,
-                  margin: const EdgeInsets.only(
-                      left: 24, right: 24, bottom: 16, top: 8),
+                  margin: const EdgeInsets.only(left: 24, right: 24, bottom: 16, top: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
@@ -55,7 +54,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      PaisaToggleButton(
+                      SikaPurseToggleButton(
                         itemIndex: ItemIndex.first,
                         title: FilterExpense.daily.stringValue(context),
                         isSelected: FilterExpense.daily == value,
@@ -69,7 +68,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         height: 1,
                         color: context.outline,
                       ),
-                      PaisaToggleButton(
+                      SikaPurseToggleButton(
                         title: FilterExpense.weekly.stringValue(context),
                         isSelected: FilterExpense.weekly == value,
                         onPressed: () {
@@ -82,7 +81,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         height: 1,
                         color: context.outline,
                       ),
-                      PaisaToggleButton(
+                      SikaPurseToggleButton(
                         title: FilterExpense.monthly.stringValue(context),
                         isSelected: FilterExpense.monthly == value,
                         onPressed: () => updateFilter(FilterExpense.monthly),
@@ -93,7 +92,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         height: 1,
                         color: context.outline,
                       ),
-                      PaisaToggleButton(
+                      SikaPurseToggleButton(
                         title: FilterExpense.yearly.stringValue(context),
                         isSelected: FilterExpense.yearly == value,
                         onPressed: () => updateFilter(FilterExpense.yearly),
@@ -104,7 +103,7 @@ class FilterBudgetToggleWidget extends StatelessWidget {
                         height: 1,
                         color: context.outline,
                       ),
-                      PaisaToggleButton(
+                      SikaPurseToggleButton(
                         itemIndex: ItemIndex.last,
                         title: FilterExpense.all.stringValue(context),
                         isSelected: FilterExpense.all == value,
@@ -124,35 +123,30 @@ class FilterBudgetToggleWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
-                  PaisaPillChip(
+                  SikaPursePillChip(
                     title: FilterExpense.daily.stringValue(context),
                     isSelected: FilterExpense.daily == value,
-                    onPressed: () => summaryController
-                        .filterExpenseNotifier.value = FilterExpense.daily,
+                    onPressed: () => summaryController.filterExpenseNotifier.value = FilterExpense.daily,
                   ),
-                  PaisaPillChip(
+                  SikaPursePillChip(
                     title: FilterExpense.weekly.stringValue(context),
                     isSelected: FilterExpense.weekly == value,
-                    onPressed: () => summaryController
-                        .filterExpenseNotifier.value = FilterExpense.weekly,
+                    onPressed: () => summaryController.filterExpenseNotifier.value = FilterExpense.weekly,
                   ),
-                  PaisaPillChip(
+                  SikaPursePillChip(
                     title: FilterExpense.monthly.stringValue(context),
                     isSelected: FilterExpense.monthly == value,
-                    onPressed: () => summaryController
-                        .filterExpenseNotifier.value = FilterExpense.monthly,
+                    onPressed: () => summaryController.filterExpenseNotifier.value = FilterExpense.monthly,
                   ),
-                  PaisaPillChip(
+                  SikaPursePillChip(
                     title: FilterExpense.yearly.stringValue(context),
                     isSelected: FilterExpense.yearly == value,
-                    onPressed: () => summaryController
-                        .filterExpenseNotifier.value = FilterExpense.yearly,
+                    onPressed: () => summaryController.filterExpenseNotifier.value = FilterExpense.yearly,
                   ),
-                  PaisaPillChip(
+                  SikaPursePillChip(
                     title: FilterExpense.all.stringValue(context),
                     isSelected: FilterExpense.all == value,
-                    onPressed: () => summaryController
-                        .filterExpenseNotifier.value = FilterExpense.all,
+                    onPressed: () => summaryController.filterExpenseNotifier.value = FilterExpense.all,
                   ),
                 ],
               ),

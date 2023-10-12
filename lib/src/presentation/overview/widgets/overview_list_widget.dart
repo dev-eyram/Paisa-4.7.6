@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import '../cubit/budget_cubit.dart';
 import 'category_list_widget.dart';
 

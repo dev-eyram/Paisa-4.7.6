@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
-import 'package:paisa/src/core/enum/transaction_type.dart';
-import 'package:paisa/src/core/extensions/recurring_extension.dart';
-import 'package:paisa/src/data/expense/data_sources/local_expense_data_manager.dart';
+import 'package:sika_purse/src/core/common.dart';
+import 'package:sika_purse/src/core/enum/transaction_type.dart';
+import 'package:sika_purse/src/core/extensions/recurring_extension.dart';
+import 'package:sika_purse/src/data/expense/data_sources/local_expense_data_manager.dart';
 
 import '../../../core/enum/recurring_type.dart';
 import '../../../domain/recurring/repository/recurring_repository.dart';
@@ -48,16 +48,14 @@ class RecurringRepositoryImpl implements RecurringRepository {
       if (recurringModel.recurringDate.isBefore(now)) {
         final nextTime = recurringModel.recurringType.getTime;
 
-        final numberOfTimes = recurringModel.recurringType
-            .differenceInNumber(now, recurringModel.recurringDate);
+        final numberOfTimes = recurringModel.recurringType.differenceInNumber(now, recurringModel.recurringDate);
         for (var i = 0; i < numberOfTimes; i++) {
-          final ExpenseModel addExpenseModel = recurringModel
-              .toExpenseModel(recurringModel.recurringDate.add(nextTime * i));
+          final ExpenseModel addExpenseModel =
+              recurringModel.toExpenseModel(recurringModel.recurringDate.add(nextTime * i));
           await expenseDataManager.addOrUpdateExpense(addExpenseModel);
         }
         final RecurringModel saveExpense = recurringModel.copyWith(
-          recurringDate:
-              recurringModel.recurringDate.add(nextTime * (numberOfTimes + 1)),
+          recurringDate: recurringModel.recurringDate.add(nextTime * (numberOfTimes + 1)),
         );
 
         await dataManager.addRecurringEvent(saveExpense);

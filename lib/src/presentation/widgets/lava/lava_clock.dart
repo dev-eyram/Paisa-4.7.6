@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
 import 'lava_painter.dart';
 
@@ -18,13 +18,11 @@ class LavaAnimation extends StatefulWidget {
   LavaAnimationState createState() => LavaAnimationState();
 }
 
-class LavaAnimationState extends State<LavaAnimation>
-    with TickerProviderStateMixin {
+class LavaAnimationState extends State<LavaAnimation> with TickerProviderStateMixin {
   final Lava lava = Lava(10);
 
-  late final AnimationController _animation =
-      AnimationController(duration: const Duration(minutes: 10), vsync: this)
-        ..repeat();
+  late final AnimationController _animation = AnimationController(duration: const Duration(minutes: 10), vsync: this)
+    ..repeat();
 
   @override
   void dispose() {

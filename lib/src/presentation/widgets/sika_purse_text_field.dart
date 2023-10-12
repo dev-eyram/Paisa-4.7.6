@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class PaisaTextFormField extends StatelessWidget {
-  const PaisaTextFormField({
+class SikaPurseTextFormField extends StatelessWidget {
+  const SikaPurseTextFormField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -49,8 +49,8 @@ class PaisaTextFormField extends StatelessWidget {
   }
 }
 
-class PaisaTextField extends StatelessWidget {
-  const PaisaTextField({
+class SikaPurseTextField extends StatelessWidget {
+  const SikaPurseTextField({
     super.key,
     required this.controller,
     required this.hintText,

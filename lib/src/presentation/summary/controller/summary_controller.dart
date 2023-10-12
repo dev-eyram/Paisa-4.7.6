@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
+import 'package:sika_purse/src/presentation/overview/pages/overview_page.dart';
 
 import '../../../../main.dart';
 import '../../../core/enum/filter_expense.dart';
@@ -20,32 +20,24 @@ class SummaryController {
     required this.getExpensesFromCategoryIdUseCase,
   });
 
-  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier =
-      ValueNotifier<DateTimeRange?>(null);
+  final ValueNotifier<DateTimeRange?> dateTimeRangeNotifier = ValueNotifier<DateTimeRange?>(null);
 
-  final FilterExpense filterExpense =
-      getIt.get<SettingsController>().fetchFilterExpense();
+  final FilterExpense filterExpense = getIt.get<SettingsController>().fetchFilterExpense();
 
-  late final ValueNotifier<FilterExpense> filterExpenseNotifier =
-      ValueNotifier<FilterExpense>(filterExpense);
+  late final ValueNotifier<FilterExpense> filterExpenseNotifier = ValueNotifier<FilterExpense>(filterExpense);
 
   final GetAccountUseCase getAccountUseCase;
   final GetCategoryUseCase getCategoryUseCase;
   final GetExpensesFromCategoryIdUseCase getExpensesFromCategoryIdUseCase;
-  final FilterExpense sortHomeExpense =
-      getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
+  final FilterExpense sortHomeExpense = getIt.get<SettingsController>().fetchFilterExpense(isHome: true);
 
-  late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier =
-      ValueNotifier<FilterExpense>(sortHomeExpense);
+  late final ValueNotifier<FilterExpense> sortHomeExpenseNotifier = ValueNotifier<FilterExpense>(sortHomeExpense);
 
-  final ValueNotifier<OverviewType> typeNotifier =
-      ValueNotifier<OverviewType>(OverviewType.expense);
+  final ValueNotifier<OverviewType> typeNotifier = ValueNotifier<OverviewType>(OverviewType.expense);
 
-  Category? fetchCategoryFromId(int categoryId) =>
-      getCategoryUseCase(categoryId);
+  Category? fetchCategoryFromId(int categoryId) => getCategoryUseCase(categoryId);
 
   Account? fetchAccountFromId(int accountId) => getAccountUseCase(accountId);
 
-  List<Expense> fetchExpensesFromCategoryId(int categoryId) =>
-      getExpensesFromCategoryIdUseCase(categoryId);
+  List<Expense> fetchExpensesFromCategoryId(int categoryId) => getExpensesFromCategoryIdUseCase(categoryId);
 }

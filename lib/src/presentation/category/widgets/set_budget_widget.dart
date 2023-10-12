@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/alerts.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../bloc/category_bloc.dart';
 
 class SetBudgetWidget extends StatelessWidget {
@@ -18,9 +18,7 @@ class SetBudgetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
-          current is CategorySuccessState ||
-          current is UpdateCategoryBudgetState,
+      buildWhen: (previous, current) => current is CategorySuccessState || current is UpdateCategoryBudgetState,
       bloc: BlocProvider.of<CategoryBloc>(context),
       builder: (context, state) {
         bool budget = false;
@@ -37,13 +35,11 @@ class SetBudgetWidget extends StatelessWidget {
                 Icons.wallet,
                 color: context.primary,
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               title: Text(context.loc.budget),
               subtitle: Text(context.loc.setBudget),
               activeColor: context.primary,
-              onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context)
-                  .add(UpdateCategoryBudgetEvent(value)),
+              onChanged: (bool value) => BlocProvider.of<CategoryBloc>(context).add(UpdateCategoryBudgetEvent(value)),
               value: budget,
             ),
             Builder(
@@ -75,7 +71,7 @@ class CategoryBudgetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PaisaTextFormField(
+        SikaPurseTextFormField(
           controller: controller,
           hintText: context.loc.enterBudget,
           label: context.loc.budget,
@@ -97,7 +93,7 @@ class CategoryBudgetWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        PaisaTextFormField(
+        SikaPurseTextFormField(
           controller: controller,
           hintText: context.loc.budgetLimit,
           label: context.loc.budgetLimit,

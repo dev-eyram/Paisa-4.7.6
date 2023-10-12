@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/common.dart';
 import '../../widgets/future_resolve.dart';
-import '../../widgets/paisa_color_picker.dart';
+import '../../widgets/sika_purse_color_picker.dart';
 import 'dynamic_color_switch_widget.dart';
 import 'setting_option.dart';
 
@@ -53,9 +53,7 @@ class SettingsColorPickerWidget extends StatelessWidget {
             ),
             context: context,
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width >= 700
-                  ? 700
-                  : double.infinity,
+              maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
             ),
             builder: (context) => ColorPickerDialogWidget(
               settings: settings,
@@ -134,9 +132,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                             vertical: 12,
                           ),
                         ),
-                        onPressed: () => value
-                            .put(appColorKey, selectedColor)
-                            .then((value) => Navigator.pop(context)),
+                        onPressed: () => value.put(appColorKey, selectedColor).then((value) => Navigator.pop(context)),
                         child: Text(context.loc.done),
                       ),
                     ),
@@ -181,9 +177,7 @@ class ColorPickerDialogWidget extends StatelessWidget {
                     vertical: 12,
                   ),
                 ),
-                onPressed: () => settings
-                    .put(appColorKey, selectedColor)
-                    .then((value) => Navigator.pop(context)),
+                onPressed: () => settings.put(appColorKey, selectedColor).then((value) => Navigator.pop(context)),
                 child: Text(context.loc.done),
               ),
             ),

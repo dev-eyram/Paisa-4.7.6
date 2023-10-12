@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/common.dart';
-import 'paisa_big_button_widget.dart';
+import 'sika_purse_big_button_widget.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
@@ -54,8 +54,7 @@ class EmptyWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             onActionPressed != null
-                ? PaisaTextButton(
-                    onPressed: onActionPressed!, title: actionTitle ?? '')
+                ? SikaPurseTextButton(onPressed: onActionPressed!, title: actionTitle ?? '')
                 : const SizedBox.shrink()
           ],
         ),

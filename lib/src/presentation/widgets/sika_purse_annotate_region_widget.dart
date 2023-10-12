@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-class PaisaAnnotatedRegionWidget extends StatelessWidget {
-  const PaisaAnnotatedRegionWidget({
+class SikaPurseAnnotatedRegionWidget extends StatelessWidget {
+  const SikaPurseAnnotatedRegionWidget({
     super.key,
     required this.child,
     this.color,
@@ -27,9 +27,7 @@ class PaisaAnnotatedRegionWidget extends StatelessWidget {
         systemNavigationBarColor: color ?? navColor,
         systemNavigationBarDividerColor: color ?? navColor,
         systemNavigationBarIconBrightness:
-            Theme.of(context).brightness == Brightness.light
-                ? Brightness.dark
-                : Brightness.light,
+            Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
       ),
       child: child,
     );

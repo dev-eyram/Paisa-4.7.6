@@ -10,8 +10,8 @@ import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/currencies/models/country_model.dart';
 import '../../settings/bloc/settings_controller.dart';
-import '../../widgets/paisa_card.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_card.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../cubit/country_cubit.dart';
 
 class CurrencySelectorPage extends StatefulWidget {
@@ -60,9 +60,7 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
         body: SafeArea(
           child: Column(
             children: [
-              widget.forceCurrencySelector
-                  ? const SizedBox.shrink()
-                  : const SizedBox(height: 16),
+              widget.forceCurrencySelector ? const SizedBox.shrink() : const SizedBox(height: 16),
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: Column(
@@ -88,7 +86,7 @@ class _CurrencySelectorPageState extends State<CurrencySelectorPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: PaisaTextFormField(
+                child: SikaPurseTextFormField(
                   hintText: context.loc.search,
                   controller: TextEditingController(),
                   keyboardType: TextInputType.name,
@@ -186,7 +184,7 @@ class _CountriesWidgetState extends State<CountriesWidget> {
       itemCount: widget.countries.length,
       itemBuilder: (context, index) {
         final CountryModel model = widget.countries[index];
-        return PaisaCard(
+        return SikaPurseCard(
           color: context.surface,
           shape: selectedModel == model
               ? RoundedRectangleBorder(

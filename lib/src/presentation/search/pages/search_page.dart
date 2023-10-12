@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'package:sika_purse/src/presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../main.dart';
@@ -12,8 +12,8 @@ import '../../../data/category/model/category_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../summary/widgets/expense_list_widget.dart';
-import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
+import '../../widgets/sika_purse_card.dart';
 import '../cubit/search_cubit.dart';
 
 class SearchPage extends StatefulWidget {
@@ -34,14 +34,13 @@ class _SearchPageState extends State<SearchPage> {
         titleSpacing: 0,
         title: Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: PaisaFilledCard(
+          child: SikaPurseFilledCard(
             child: Row(
               children: [
                 Expanded(
                   child: TextFormField(
                     decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                       filled: false,
                       hintText: context.loc.search,
@@ -54,15 +53,12 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    final Map<String, dynamic> result =
-                        await showModalBottomSheet(
+                    final Map<String, dynamic> result = await showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
                       isDismissible: true,
                       constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width >= 700
-                            ? 700
-                            : double.infinity,
+                        maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
                       ),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -79,16 +75,14 @@ class _SearchPageState extends State<SearchPage> {
                           builder: (context, scrollController) => FilterWidget(
                             scrollController,
                             selectedAccount: searchCubitCubit.selectedAccountId,
-                            selectedCategory:
-                                searchCubitCubit.selectedCategoryId,
+                            selectedCategory: searchCubitCubit.selectedCategoryId,
                           ),
                         );
                       },
                     );
                     searchCubitCubit.selectedAccountId = result['account'];
                     searchCubitCubit.selectedCategoryId = result['category'];
-                    searchCubitCubit
-                        .searchWithQuery(textEditingController.text);
+                    searchCubitCubit.searchWithQuery(textEditingController.text);
                   },
                   icon: Icon(
                     MdiIcons.filter,
@@ -228,9 +222,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         });
                       },
                       avatar: Icon(
-                        color: account.superId == selectedAccount
-                            ? context.primary
-                            : context.onSurfaceVariant,
+                        color: account.superId == selectedAccount ? context.primary : context.onSurfaceVariant,
                         IconData(
                           account.cardType!.icon.codePoint,
                           fontFamily: fontFamilyName,
@@ -247,15 +239,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       label: Text(account.bankName),
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
-                              color: account.superId == selectedAccount
-                                  ? context.primary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant),
+                      labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: account.superId == selectedAccount
+                              ? context.primary
+                              : Theme.of(context).colorScheme.onSurfaceVariant),
                       padding: const EdgeInsets.all(12),
                     ),
                   );
@@ -298,9 +285,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         });
                       },
                       avatar: Icon(
-                        color: account.superId == selectedCategory
-                            ? context.primary
-                            : context.onSurfaceVariant,
+                        color: account.superId == selectedCategory ? context.primary : context.onSurfaceVariant,
                         IconData(
                           account.icon,
                           fontFamily: fontFamilyName,
@@ -317,15 +302,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                       showCheckmark: false,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       label: Text(account.name),
-                      labelStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
-                              color: account.superId == selectedCategory
-                                  ? context.primary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant),
+                      labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: account.superId == selectedCategory
+                              ? context.primary
+                              : Theme.of(context).colorScheme.onSurfaceVariant),
                       padding: const EdgeInsets.all(12),
                     ),
                   );
@@ -339,7 +319,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              PaisaTextButton(
+              SikaPurseTextButton(
                 onPressed: () {
                   Navigator.pop(
                     context,
@@ -351,7 +331,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 },
                 title: 'Clear',
               ),
-              PaisaButton(
+              SikaPurseButton(
                 onPressed: () {
                   Navigator.pop(
                     context,

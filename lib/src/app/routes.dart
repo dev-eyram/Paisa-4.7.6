@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/reports/pages/reports_page.dart';
 import 'package:provider/provider.dart';
 
 import '../core/common.dart';
@@ -104,9 +103,6 @@ const addDebitPath = 'add-debit';
 
 const introPageName = 'intro';
 const introPagePath = '/intro';
-
-const reportsPageName = 'reports';
-const reportsPagePath = '/reports';
 
 const categorySelectorName = 'category-selector';
 const categorySelectorPath = '/category-selector';
@@ -329,11 +325,6 @@ final GoRouter goRouter = GoRouter(
               builder: (context, state) => const ExportAndImportPage(),
             ),
           ],
-        ),
-        GoRoute(
-          name: reportsPageName,
-          path: reportsPagePath,
-          builder: (context, state) => const ReportsPage(),
         ),
       ],
     ),

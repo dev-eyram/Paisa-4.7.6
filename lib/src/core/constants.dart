@@ -1,9 +1,3 @@
-const gitHubUrl = 'https://github.com/h4h13/paisa';
-const playStoreUrl =
-    'https://play.google.com/store/apps/details?id=dev.hemanths.paisa';
-const telegramGroupUrl = 'https://t.me/app_paisa';
-const termsAndConditionsUrl = 'https://hemanths.dev/privacy';
-
 const String themeModeKey = 'key_theme_mode';
 const String appColorKey = 'key_app_color';
 const String dynamicThemeKey = 'key_dynamic_color';
@@ -19,8 +13,7 @@ const String smallSizeFabKey = 'user_small_size_fab_key';
 const String userLanguageKey = 'user_language_key';
 const String userCountryKey = 'user_country_key';
 const String userCustomCurrencyKey = 'user_custom_currency_key';
-const String userCustomCurrencyLeftOrRightKey =
-    'user_custom_currency_let_or_right_key';
+const String userCustomCurrencyLeftOrRightKey = 'user_custom_currency_let_or_right_key';
 const String scheduleTime = 'schedule_time_key';
 const String fontFamilyName = 'Material Design Icons';
 const String fontFamilyPackageName = 'material_design_icons_flutter';

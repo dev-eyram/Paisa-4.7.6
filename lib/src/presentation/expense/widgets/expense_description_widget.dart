@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../bloc/expense_bloc.dart';
 
 class ExpenseDescriptionWidget extends StatelessWidget {
@@ -17,13 +17,12 @@ class ExpenseDescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
+      child: SikaPurseTextFormField(
         maxLines: 1,
         controller: controller,
         hintText: context.loc.description,
         keyboardType: TextInputType.name,
-        onChanged: (value) =>
-            BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
+        onChanged: (value) => BlocProvider.of<ExpenseBloc>(context).currentDescription = value,
       ),
     );
   }

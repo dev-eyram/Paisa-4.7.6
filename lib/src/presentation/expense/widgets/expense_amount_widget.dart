@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/transaction_type.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../bloc/expense_bloc.dart';
 
 class ExpenseAmountWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class ExpenseAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
+      child: SikaPurseTextFormField(
         controller: controller,
         hintText: context.loc.amount,
         keyboardType: TextInputType.number,
@@ -39,8 +39,7 @@ class ExpenseAmountWidget extends StatelessWidget {
         ],
         onChanged: (value) {
           double? amount = double.tryParse(value);
-          if (BlocProvider.of<ExpenseBloc>(context).transactionType !=
-              TransactionType.transfer) {
+          if (BlocProvider.of<ExpenseBloc>(context).transactionType != TransactionType.transfer) {
             BlocProvider.of<ExpenseBloc>(context).expenseAmount = amount;
           } else {
             BlocProvider.of<ExpenseBloc>(context).transferAmount = amount;

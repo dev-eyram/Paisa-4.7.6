@@ -7,7 +7,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../widgets/lava/lava_clock.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
+import '../../widgets/sika_purse_bottom_sheet.dart';
 import '../bloc/accounts_bloc.dart';
 import 'account_card.dart';
 
@@ -23,8 +23,7 @@ class AccountPageViewWidget extends StatefulWidget {
   State<AccountPageViewWidget> createState() => _AccountPageViewWidgetState();
 }
 
-class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
-    with AutomaticKeepAliveClientMixin {
+class _AccountPageViewWidgetState extends State<AccountPageViewWidget> with AutomaticKeepAliveClientMixin {
   final PageController _controller = PageController();
 
   @override
@@ -47,21 +46,17 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
               controller: _controller,
               itemCount: widget.accounts.length,
               onPageChanged: (index) {
-                BlocProvider.of<AccountsBloc>(context)
-                    .add(AccountSelectedEvent(widget.accounts[index]));
+                BlocProvider.of<AccountsBloc>(context).add(AccountSelectedEvent(widget.accounts[index]));
               },
               itemBuilder: (_, index) {
                 return BlocBuilder<AccountsBloc, AccountsState>(
                   builder: (context, state) {
                     if (state is AccountSelectedState) {
                       final Account account = widget.accounts[index];
-                      final String expense =
-                          state.expenses.totalExpense.toFormateCurrency();
-                      final String income =
-                          state.expenses.totalIncome.toFormateCurrency();
+                      final String expense = state.expenses.totalExpense.toFormateCurrency();
+                      final String income = state.expenses.totalIncome.toFormateCurrency();
                       final String totalBalance =
-                          (account.initialAmount + state.expenses.fullTotal)
-                              .toFormateCurrency();
+                          (account.initialAmount + state.expenses.fullTotal).toFormateCurrency();
                       return AccountCard(
                         key: ValueKey(account.hashCode),
                         expense: expense,
@@ -71,7 +66,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                         bankName: account.bankName,
                         cardType: account.cardType ?? CardType.bank,
                         onDelete: () {
-                          paisaAlertDialog(
+                          sikaPurseAlertDialog(
                             context,
                             title: Text(
                               context.loc.dialogDeleteTitle,
@@ -92,8 +87,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                             ),
                             confirmationButton: TextButton(
                               onPressed: () {
-                                BlocProvider.of<AccountsBloc>(context)
-                                    .add(DeleteAccountEvent(account.superId!));
+                                BlocProvider.of<AccountsBloc>(context).add(DeleteAccountEvent(account.superId!));
                                 Navigator.pop(context);
                               },
                               child: Text(context.loc.delete),
@@ -103,9 +97,7 @@ class _AccountPageViewWidgetState extends State<AccountPageViewWidget>
                         onTap: () {
                           context.pushNamed(
                             editAccountName,
-                            pathParameters: <String, String>{
-                              'aid': account.superId.toString()
-                            },
+                            pathParameters: <String, String>{'aid': account.superId.toString()},
                           );
                         },
                       );

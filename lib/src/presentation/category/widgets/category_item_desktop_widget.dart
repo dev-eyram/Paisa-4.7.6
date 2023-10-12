@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_card.dart';
 
 class CategoryItemDesktopWidget extends StatelessWidget {
   const CategoryItemDesktopWidget({
@@ -18,7 +18,7 @@ class CategoryItemDesktopWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaCard(
+    return SikaPurseCard(
       child: InkWell(
         onTap: () => context.pushNamed(
           editCategoryPath,

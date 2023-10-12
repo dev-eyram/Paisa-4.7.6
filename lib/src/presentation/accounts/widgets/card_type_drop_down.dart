@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
 import '../../../core/enum/card_type.dart';
-import '../../widgets/paisa_pill_chip.dart';
+import '../../widgets/sika_purse_pill_chip.dart';
 import '../bloc/accounts_bloc.dart';
 
 class CardTypeButtons extends StatelessWidget {
@@ -20,22 +20,19 @@ class CardTypeButtons extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            PaisaPillChip(
+            SikaPursePillChip(
               title: CardType.cash.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
-                  CardType.cash,
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType == CardType.cash,
               onPressed: () => _update(context, CardType.cash),
             ),
-            PaisaPillChip(
+            SikaPursePillChip(
               title: CardType.bank.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
-                  CardType.bank,
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType == CardType.bank,
               onPressed: () => _update(context, CardType.bank),
             ),
-            PaisaPillChip(
+            SikaPursePillChip(
               title: CardType.wallet.stringValue(context),
-              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType ==
-                  CardType.wallet,
+              isSelected: BlocProvider.of<AccountsBloc>(context).selectedType == CardType.wallet,
               onPressed: () => _update(context, CardType.wallet),
             ),
           ],

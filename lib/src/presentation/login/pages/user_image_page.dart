@@ -8,7 +8,7 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../widgets/paisa_user_image_widget.dart';
+import '../../widgets/sika_purse_user_image_widget.dart';
 
 class UserImagePage extends StatefulWidget {
   const UserImagePage({Key? key}) : super(key: key);
@@ -18,8 +18,7 @@ class UserImagePage extends StatefulWidget {
 }
 
 class _UserImagePageState extends State<UserImagePage> {
-  final Box<dynamic> value =
-      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
+  final Box<dynamic> value = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name);
 
   void _pickImage() {
     final ImagePicker picker = ImagePicker();
@@ -64,10 +63,7 @@ class _UserImagePageState extends State<UserImagePage> {
                 Text(
                   context.loc.imageDesc,
                   style: context.titleMedium?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.75),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.75),
                   ),
                 ),
                 const SizedBox(height: 16),

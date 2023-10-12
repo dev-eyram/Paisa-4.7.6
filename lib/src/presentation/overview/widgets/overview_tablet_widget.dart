@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../summary/controller/summary_controller.dart';
-import '../../widgets/filter_widget/paisa_filter_transaction_widget.dart';
-import '../../widgets/paisa_pill_chip.dart';
+import '../../widgets/filter_widget/sika_purse_filter_transaction_widget.dart';
+import '../../widgets/sika_purse_pill_chip.dart';
 import '../cubit/budget_cubit.dart';
 import '../pages/overview_page.dart';
 
@@ -32,7 +32,7 @@ class OverviewTablet extends StatelessWidget {
                   child: Row(
                     children: [
                       const SizedBox(width: 8),
-                      const PaisaFilterTransactionWidget(),
+                      const SikaPurseFilterTransactionWidget(),
                       Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,
@@ -42,7 +42,7 @@ class OverviewTablet extends StatelessWidget {
                           itemCount: state.filerTimes.length,
                           itemBuilder: (context, index) {
                             final item = state.filerTimes[index];
-                            return PaisaPillChip(
+                            return SikaPursePillChip(
                               title: item,
                               onPressed: () {
                                 if (budgetCubit.selectedTime != item) {

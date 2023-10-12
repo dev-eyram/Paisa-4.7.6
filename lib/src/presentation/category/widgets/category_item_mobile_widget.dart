@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_card.dart';
 
 class CategoryItemMobileWidget extends StatelessWidget {
   const CategoryItemMobileWidget({
@@ -18,15 +18,14 @@ class CategoryItemMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaFilledCard(
+    return SikaPurseFilledCard(
       child: ListTile(
         onTap: () => context.pushNamed(
           editCategoryName,
           pathParameters: <String, String>{'cid': category.superId.toString()},
         ),
         leading: CircleAvatar(
-          backgroundColor: Color(category.color ?? Colors.amber.shade100.value)
-              .withOpacity(0.3),
+          backgroundColor: Color(category.color ?? Colors.amber.shade100.value).withOpacity(0.3),
           child: Icon(
             IconData(
               category.icon,
@@ -52,10 +51,7 @@ class CategoryItemMobileWidget extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: context.bodyLarge?.copyWith(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurfaceVariant
-                      .withOpacity(0.75),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.75),
                 ),
               ),
         trailing: IconButton(

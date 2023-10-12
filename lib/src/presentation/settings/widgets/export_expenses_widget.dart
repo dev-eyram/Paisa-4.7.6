@@ -41,8 +41,7 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (_, child) {
         return Theme(
-          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
-              .copyWith(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme).copyWith(
             appBarTheme: Theme.of(context).appBarTheme,
           ),
           child: child!,
@@ -55,7 +54,7 @@ class ExportExpensesWidgetState extends State<ExportExpensesWidget> {
     final data = csvDataList(expenses, accountDataSource, categoryDataSource);
     final csvData = const ListToCsvConverter().convert(data);
     final directory = await getApplicationSupportDirectory();
-    final path = "${directory.path}/paisa-expense-manager.csv";
+    final path = "${directory.path}/sika-purse-expense-manager.csv";
     final file = File(path);
     await file.writeAsString(csvData);
     Share.shareFiles([path], subject: subject);
@@ -114,8 +113,7 @@ List<List<String>> csvDataList(
       (index) {
         final expense = expenses[index];
         final account = accountDataSource.fetchAccountFromId(expense.accountId);
-        final category =
-            categoryDataSource.fetchCategoryFromId(expense.categoryId);
+        final category = categoryDataSource.fetchCategoryFromId(expense.categoryId);
         return expenseRow(
           index,
           expense: expense,

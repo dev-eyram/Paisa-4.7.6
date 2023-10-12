@@ -16,10 +16,10 @@ import '../../../data/category/model/category_model.dart';
 import '../../../domain/account/entities/account.dart';
 import '../../../domain/category/entities/category.dart';
 import '../../expense/widgets/selectable_item_widget.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_pill_chip.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
+import '../../widgets/sika_purse_pill_chip.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../cubit/recurring_cubit.dart';
 
 class AddRecurringPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
         create: (context) => recurringCubit,
@@ -88,7 +88,7 @@ class _AddRecurringPageState extends State<AddRecurringPage> {
                 bottomNavigationBar: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    child: SikaPurseBigButton(
                       onPressed: () {
                         recurringCubit.addRecurringEvent();
                       },
@@ -130,16 +130,14 @@ class TransactionToggleButtons extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                PaisaPillChip(
+                SikaPursePillChip(
                   title: TransactionType.expense.stringName(context),
-                  isSelected:
-                      recurringCubit.transactionType == TransactionType.expense,
+                  isSelected: recurringCubit.transactionType == TransactionType.expense,
                   onPressed: () => _update(TransactionType.expense),
                 ),
-                PaisaPillChip(
+                SikaPursePillChip(
                   title: TransactionType.income.stringName(context),
-                  isSelected:
-                      recurringCubit.transactionType == TransactionType.income,
+                  isSelected: recurringCubit.transactionType == TransactionType.income,
                   onPressed: () => _update(TransactionType.income),
                 ),
               ],
@@ -184,8 +182,7 @@ class SelectedAccount extends StatelessWidget {
             AccountSelectedWidget(
               accounts: accounts,
               onSelected: (selectedId) {
-                BlocProvider.of<RecurringCubit>(context).selectedAccountId =
-                    selectedId;
+                BlocProvider.of<RecurringCubit>(context).selectedAccountId = selectedId;
               },
             )
           ],
@@ -279,17 +276,13 @@ class SelectCategory extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 context.loc.selectCategory,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             CategorySelectWidget(
               categories: categories,
               onSelected: (int selectedId) {
-                BlocProvider.of<RecurringCubit>(context).selectedCategoryId =
-                    selectedId;
+                BlocProvider.of<RecurringCubit>(context).selectedCategoryId = selectedId;
               },
             )
           ],
@@ -354,10 +347,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                       color: context.primary,
                     ),
                   ),
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: context.onSurfaceVariant),
+                  labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -374,9 +364,7 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                     });
                   },
                   avatar: Icon(
-                    color: category.superId == selectedId
-                        ? context.primary
-                        : context.onSurfaceVariant,
+                    color: category.superId == selectedId ? context.primary : context.onSurfaceVariant,
                     IconData(
                       category.icon,
                       fontFamily: fontFamilyName,
@@ -393,10 +381,8 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                   showCheckmark: false,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   label: Text(category.name),
-                  labelStyle: context.titleMedium?.copyWith(
-                      color: category.superId == selectedId
-                          ? context.primary
-                          : context.onSurfaceVariant),
+                  labelStyle: context.titleMedium
+                      ?.copyWith(color: category.superId == selectedId ? context.primary : context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -420,7 +406,7 @@ class RecurringNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
+      child: SikaPurseTextFormField(
         maxLines: 1,
         controller: controller,
         hintText: context.loc.recurring,
@@ -435,8 +421,7 @@ class RecurringNameWidget extends StatelessWidget {
             return context.loc.validName;
           }
         },
-        onChanged: (value) =>
-            BlocProvider.of<RecurringCubit>(context).recurringName = value,
+        onChanged: (value) => BlocProvider.of<RecurringCubit>(context).recurringName = value,
       ),
     );
   }
@@ -454,7 +439,7 @@ class RecurringAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: PaisaTextFormField(
+      child: SikaPurseTextFormField(
         controller: controller,
         hintText: context.loc.amount,
         keyboardType: TextInputType.number,
@@ -494,13 +479,11 @@ class RecurringDatePickerWidget extends StatefulWidget {
   });
 
   @override
-  State<RecurringDatePickerWidget> createState() =>
-      _RecurringDatePickerWidgetState();
+  State<RecurringDatePickerWidget> createState() => _RecurringDatePickerWidgetState();
 }
 
 class _RecurringDatePickerWidgetState extends State<RecurringDatePickerWidget> {
-  late final RecurringCubit recurringCubit =
-      BlocProvider.of<RecurringCubit>(context);
+  late final RecurringCubit recurringCubit = BlocProvider.of<RecurringCubit>(context);
 
   late DateTime selectedDateTime = recurringCubit.selectedDate;
 
@@ -610,28 +593,24 @@ class RecurringWidget extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Row(
                   children: [
-                    PaisaPillChip(
+                    SikaPursePillChip(
                       title: RecurringType.daily.name(context),
-                      isSelected:
-                          recurringCubit.recurringType == RecurringType.daily,
+                      isSelected: recurringCubit.recurringType == RecurringType.daily,
                       onPressed: () => _update(RecurringType.daily),
                     ),
-                    PaisaPillChip(
+                    SikaPursePillChip(
                       title: RecurringType.weekly.name(context),
-                      isSelected:
-                          recurringCubit.recurringType == RecurringType.weekly,
+                      isSelected: recurringCubit.recurringType == RecurringType.weekly,
                       onPressed: () => _update(RecurringType.weekly),
                     ),
-                    PaisaPillChip(
+                    SikaPursePillChip(
                       title: RecurringType.monthly.name(context),
-                      isSelected:
-                          recurringCubit.recurringType == RecurringType.monthly,
+                      isSelected: recurringCubit.recurringType == RecurringType.monthly,
                       onPressed: () => _update(RecurringType.monthly),
                     ),
-                    PaisaPillChip(
+                    SikaPursePillChip(
                       title: RecurringType.yearly.name(context),
-                      isSelected:
-                          recurringCubit.recurringType == RecurringType.yearly,
+                      isSelected: recurringCubit.recurringType == RecurringType.yearly,
                       onPressed: () => _update(RecurringType.yearly),
                     ),
                   ],

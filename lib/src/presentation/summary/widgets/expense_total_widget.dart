@@ -6,7 +6,7 @@ import '../../../core/common.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../accounts/widgets/account_summary_widget.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_card.dart';
 import 'expense_total_for_month_widget.dart';
 import 'total_balance_widget.dart';
 
@@ -23,8 +23,7 @@ class ExpenseTotalWidget extends StatelessWidget {
     final totalExpenseBalance = expenses.fullTotal;
     final totalExpenses = expenses.totalExpense;
     final totalIncome = expenses.totalIncome;
-    final totalAccountBalance =
-        getIt.get<Box<AccountModel>>().totalAccountInitialAmount;
+    final totalAccountBalance = getIt.get<Box<AccountModel>>().totalAccountInitialAmount;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +32,7 @@ class ExpenseTotalWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
-          child: PaisaCard(
+          child: SikaPurseCard(
             elevation: 0,
             color: context.primaryContainer,
             child: Padding(

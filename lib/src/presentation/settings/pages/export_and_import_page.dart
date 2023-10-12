@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../../main.dart';
 import '../../../core/common.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
 import '../cubit/data_cubit.dart';
 import '../widgets/settings_group_card.dart';
 
@@ -14,7 +14,7 @@ class ExportAndImportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DataCubit dataCubit = getIt.get();
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: BlocListener(
         bloc: dataCubit,
@@ -25,17 +25,14 @@ class ExportAndImportPage extends StatelessWidget {
             context.showMaterialSnackBar(state.error);
           } else if (state is DataLoadingState) {
             context.showMaterialSnackBar(
-              state.isLoadingImport
-                  ? context.loc.restoringBackup
-                  : context.loc.creatingBackup,
+              state.isLoadingImport ? context.loc.restoringBackup : context.loc.creatingBackup,
             );
           } else if (state is DataExportState) {
             context.showMaterialSnackBar(context.loc.creatingBackupSuccess);
           }
         },
         child: Scaffold(
-          appBar: context
-              .materialYouAppBar(context.loc.backupAndRestoreTitle, actions: [
+          appBar: context.materialYouAppBar(context.loc.backupAndRestoreTitle, actions: [
             BlocBuilder(
               bloc: dataCubit,
               builder: (context, state) {

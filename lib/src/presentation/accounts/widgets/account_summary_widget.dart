@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../../core/common.dart';
 import '../../../core/theme/custom_color.dart';
 import '../../../domain/expense/entities/expense.dart';
-import '../../widgets/paisa_expense_stats_widget.dart';
+import '../../widgets/sika_purse_expense_stats_widget.dart';
 
 class AccountSummaryWidget extends StatelessWidget {
   const AccountSummaryWidget({
@@ -42,24 +42,20 @@ class AccountSummaryWidget extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: PaisaExpenseStatsWidget(
+                child: SikaPurseExpenseStatsWidget(
                   title: context.loc.income,
                   total: expenses.thisMonthIncome.toFormateCurrency(),
                   data: expenses.incomeDoubleList,
-                  graphLineColor:
-                      Theme.of(context).extension<CustomColors>()!.green ??
-                          context.secondary,
+                  graphLineColor: Theme.of(context).extension<CustomColors>()!.green ?? context.secondary,
                   iconData: MdiIcons.arrowBottomLeft,
                 ),
               ),
               Expanded(
-                child: PaisaExpenseStatsWidget(
+                child: SikaPurseExpenseStatsWidget(
                   title: context.loc.expense,
                   total: expenses.thisMonthExpense.toFormateCurrency(),
                   data: expenses.expenseDoubleList,
-                  graphLineColor:
-                      Theme.of(context).extension<CustomColors>()!.red ??
-                          context.secondary,
+                  graphLineColor: Theme.of(context).extension<CustomColors>()!.red ?? context.secondary,
                   iconData: MdiIcons.arrowTopRight,
                 ),
               ),

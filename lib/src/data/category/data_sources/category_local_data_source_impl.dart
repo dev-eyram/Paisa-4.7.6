@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/data/category/data_sources/default_category.dart';
+import 'package:sika_purse/src/data/category/data_sources/default_category.dart';
 
 import '../model/category_model.dart';
 import 'category_local_data_source.dart';
@@ -43,8 +43,7 @@ class LocalCategoryManagerDataSourceImpl implements LocalCategoryDataManager {
   Iterable<CategoryModel> exportData() => categoryBox.values;
 
   @override
-  CategoryModel? fetchCategoryFromId(int categoryId) =>
-      categoryBox.values.firstWhereOrNull(
+  CategoryModel? fetchCategoryFromId(int categoryId) => categoryBox.values.firstWhereOrNull(
         (element) => element.superId == categoryId,
       );
 

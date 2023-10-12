@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
 import '../../../core/enum/transaction_type.dart';
-import '../../widgets/paisa_pill_chip.dart';
+import '../../widgets/sika_purse_pill_chip.dart';
 import '../bloc/expense_bloc.dart';
 
 class TransactionToggleButtons extends StatelessWidget {
@@ -25,25 +25,19 @@ class TransactionToggleButtons extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                PaisaPillChip(
+                SikaPursePillChip(
                   title: TransactionType.expense.stringName(context),
-                  isSelected:
-                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
-                          TransactionType.expense,
+                  isSelected: BlocProvider.of<ExpenseBloc>(context).transactionType == TransactionType.expense,
                   onPressed: () => _update(context, TransactionType.expense),
                 ),
-                PaisaPillChip(
+                SikaPursePillChip(
                   title: TransactionType.income.stringName(context),
-                  isSelected:
-                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
-                          TransactionType.income,
+                  isSelected: BlocProvider.of<ExpenseBloc>(context).transactionType == TransactionType.income,
                   onPressed: () => _update(context, TransactionType.income),
                 ),
-                PaisaPillChip(
+                SikaPursePillChip(
                   title: TransactionType.transfer.stringName(context),
-                  isSelected:
-                      BlocProvider.of<ExpenseBloc>(context).transactionType ==
-                          TransactionType.transfer,
+                  isSelected: BlocProvider.of<ExpenseBloc>(context).transactionType == TransactionType.transfer,
                   onPressed: () => _update(context, TransactionType.transfer),
                 ),
               ],

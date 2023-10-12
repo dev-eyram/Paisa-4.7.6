@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
 import '../../../../main.dart';
 import '../../../data/accounts/model/account_model.dart';
@@ -36,7 +36,7 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
               accounts.length,
               (index) {
                 final Account account = accounts[index];
-                return PaisaFilterChip(
+                return SikaPurseFilterChip(
                   title: account.bankName,
                   onPressed: () {
                     setState(() {
@@ -60,8 +60,8 @@ class _PillsAccountWidgetState extends State<PillsAccountWidget> {
   }
 }
 
-class PaisaFilterChip extends StatelessWidget {
-  const PaisaFilterChip({
+class SikaPurseFilterChip extends StatelessWidget {
+  const SikaPurseFilterChip({
     super.key,
     required this.title,
     required this.onPressed,
@@ -101,8 +101,7 @@ class PaisaFilterChip extends StatelessWidget {
         showCheckmark: false,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         label: Text(title),
-        labelStyle: context.titleMedium?.copyWith(
-            color: isSelected ? context.primary : context.onSurfaceVariant),
+        labelStyle: context.titleMedium?.copyWith(color: isSelected ? context.primary : context.onSurfaceVariant),
         padding: const EdgeInsets.all(12),
       ),
     );

@@ -11,8 +11,8 @@ import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
 import '../../../data/debt/models/transactions_model.dart';
 import '../../../domain/debt/entities/transaction.dart';
-import '../../widgets/paisa_card.dart';
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_card.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../cubit/debts_bloc.dart';
 
 class DebtItemWidget extends StatelessWidget {
@@ -29,8 +29,7 @@ class DebtItemWidget extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       constraints: BoxConstraints(
-        maxWidth:
-            MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
+        maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
       ),
       builder: (context) => Padding(
         padding: MediaQuery.of(context).viewInsets,
@@ -51,7 +50,7 @@ class DebtItemWidget extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: PaisaTextFormField(
+                      child: SikaPurseTextFormField(
                         controller: controller,
                         hintText: context.loc.enterAmount,
                         keyboardType: TextInputType.number,
@@ -85,8 +84,7 @@ class DebtItemWidget extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -99,14 +97,11 @@ class DebtItemWidget extends StatelessWidget {
                   ),
                   onPressed: () {
                     if (dateTime != null) {
-                      final double amount =
-                          double.tryParse(controller.text) ?? 0;
-                      getIt.get<DebtsBloc>().add(
-                          AddTransactionToDebtEvent(debt, amount, dateTime!));
+                      final double amount = double.tryParse(controller.text) ?? 0;
+                      getIt.get<DebtsBloc>().add(AddTransactionToDebtEvent(debt, amount, dateTime!));
                       Navigator.pop(context);
                     } else {
-                      context.showMaterialSnackBar(
-                          context.loc.selectDateErrorMessage);
+                      context.showMaterialSnackBar(context.loc.selectDateErrorMessage);
                       Navigator.pop(context);
                     }
                   },
@@ -137,13 +132,11 @@ class DebtItemWidget extends StatelessWidget {
     return ValueListenableBuilder<Box<TransactionsModel>>(
       valueListenable: getIt.get<Box<TransactionsModel>>().listenable(),
       builder: (context, value, child) {
-        final List<Transaction> transactions =
-            value.getTransactionsFromId(debt.superId ?? 0).toEntities();
-        final double amount = transactions.fold<double>(
-            0, (previousValue, element) => previousValue + element.amount);
+        final List<Transaction> transactions = value.getTransactionsFromId(debt.superId ?? 0).toEntities();
+        final double amount = transactions.fold<double>(0, (previousValue, element) => previousValue + element.amount);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: PaisaFilledCard(
+          child: SikaPurseFilledCard(
             child: InkWell(
               onTap: () => context.pushNamed(
                 debtAddOrEditName,
@@ -161,10 +154,7 @@ class DebtItemWidget extends StatelessWidget {
                     subtitle: Text(
                       debt.description,
                       style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurfaceVariant
-                            .withOpacity(0.75),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.75),
                       ),
                     ),
                     trailing: Text(
@@ -200,16 +190,9 @@ class DebtItemWidget extends StatelessWidget {
                             color: context.onSurfaceVariant,
                           ),
                           label: Text(
-                            debt.debtType == DebtType.debt
-                                ? context.loc.payDebt
-                                : context.loc.payCredit,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant,
+                            debt.debtType == DebtType.debt ? context.loc.payDebt : context.loc.payCredit,
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 ),
                           ),
                           style: TextButton.styleFrom(),

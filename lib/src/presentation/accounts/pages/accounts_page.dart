@@ -7,7 +7,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/account/entities/account.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import 'horizontal/account_mobile_horizontal_page.dart';
 import 'vertical/account_vertical_page.dart';
 
@@ -19,9 +19,8 @@ class AccountsPage extends StatelessWidget {
     return Scaffold(
       key: const Key('accounts_mobile'),
       body: ValueListenableBuilder<Box<dynamic>>(
-        valueListenable: getIt
-            .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-            .listenable(keys: [userAccountsStyleKey]),
+        valueListenable:
+            getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(keys: [userAccountsStyleKey]),
         builder: (_, settings, __) {
           return ValueListenableBuilder<Box<AccountModel>>(
             valueListenable: getIt.get<Box<AccountModel>>().listenable(),

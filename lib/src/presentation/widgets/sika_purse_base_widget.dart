@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-class PaisaBaseWidget extends StatelessWidget {
-  const PaisaBaseWidget({super.key, required this.child});
+class SikaPurseBaseWidget extends StatelessWidget {
+  const SikaPurseBaseWidget({super.key, required this.child});
 
   final Widget child;
 

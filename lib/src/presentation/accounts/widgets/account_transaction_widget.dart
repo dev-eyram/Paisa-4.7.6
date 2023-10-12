@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/common.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/transactions_header_widget.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 import 'account_history_widget.dart';
 

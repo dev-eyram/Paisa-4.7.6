@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_color_picker.dart';
+import '../../widgets/sika_purse_color_picker.dart';
 import '../bloc/accounts_bloc.dart';
 
 class AccountColorPickerWidget extends StatelessWidget {
@@ -11,9 +11,7 @@ class AccountColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountsBloc, AccountsState>(
-      buildWhen: (previous, current) =>
-          current is AccountColorSelectedState ||
-          current is AccountSuccessState,
+      buildWhen: (previous, current) => current is AccountColorSelectedState || current is AccountSuccessState,
       builder: (context, state) {
         int color = Colors.red.value;
         if (state is AccountColorSelectedState) {
@@ -25,15 +23,12 @@ class AccountColorPickerWidget extends StatelessWidget {
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () async {
-            final color = await paisaColorPicker(
+            final color = await sikaPurseColorPicker(
               context,
-              defaultColor:
-                  BlocProvider.of<AccountsBloc>(context).selectedColor ??
-                      Colors.red.value,
+              defaultColor: BlocProvider.of<AccountsBloc>(context).selectedColor ?? Colors.red.value,
             );
             if (context.mounted) {
-              BlocProvider.of<AccountsBloc>(context)
-                  .add(AccountColorSelectedEvent(color));
+              BlocProvider.of<AccountsBloc>(context).add(AccountColorSelectedEvent(color));
             }
           },
           leading: Icon(

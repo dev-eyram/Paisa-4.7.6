@@ -6,8 +6,8 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
 import '../../widgets/lava/lava_clock.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_big_button_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -28,7 +28,7 @@ class IntroBigScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       child: Material(
         child: Row(
           children: [
@@ -51,10 +51,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                         ),
                         Text(
                           context.loc.appTitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayMedium
-                              ?.copyWith(
+                          style: Theme.of(context).textTheme.displayMedium?.copyWith(
                                 color: context.primary,
                               ),
                         ),
@@ -62,10 +59,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                     ),
                     Text(
                       context.loc.intoTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(color: context.onSurface),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: context.onSurface),
                     ),
                     const SizedBox(height: 24),
                     Column(
@@ -83,10 +77,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
+                                ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                           ),
                         ),
                         ListTile(
@@ -101,10 +92,7 @@ class IntroBigScreenWidget extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
+                                ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                           ),
                         ),
                         ListTile(
@@ -119,18 +107,13 @@ class IntroBigScreenWidget extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface),
+                                ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                           ),
                         ),
                         const SizedBox(height: 24),
-                        PaisaBigButton(
-                          onPressed: () => getIt
-                              .get<Box<dynamic>>(
-                                  instanceName: BoxType.settings.name)
-                              .put(userIntroKey, true),
+                        SikaPurseBigButton(
+                          onPressed: () =>
+                              getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).put(userIntroKey, true),
                           title: context.loc.introCTA,
                         )
                       ],
@@ -253,11 +236,9 @@ class IntoMobileWidget extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 24),
-          child: PaisaBigButton(
+          child: SikaPurseBigButton(
             onPressed: () {
-              getIt
-                  .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-                  .put(userIntroKey, true);
+              getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).put(userIntroKey, true);
             },
             title: context.loc.introCTA,
           ),

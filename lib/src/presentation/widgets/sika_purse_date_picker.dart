@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-Future<DateTime?> paisaDatePicker(
+Future<DateTime?> sikaPurseDatePicker(
   BuildContext context, {
   required DateTime selectedDateTime,
 }) {

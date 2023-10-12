@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/enum/filter_expense.dart';
+import 'package:sika_purse/src/core/enum/filter_expense.dart';
 
 import '../../../core/common.dart';
 import '../../../core/extensions/filter_expense_extension.dart';
@@ -47,9 +47,7 @@ class TransactionsHeaderWidget extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width >= 700
-                  ? 700
-                  : double.infinity,
+              maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
             ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(

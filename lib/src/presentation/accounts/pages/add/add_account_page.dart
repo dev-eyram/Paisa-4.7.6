@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/presentation/widgets/paisa_annotate_region_widget.dart';
+import 'package:sika_purse/src/presentation/widgets/sika_purse_annotate_region_widget.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../core/enum/card_type.dart';
 import '../../../settings/bloc/settings_controller.dart';
-import '../../../widgets/paisa_big_button_widget.dart';
-import '../../../widgets/paisa_bottom_sheet.dart';
-import '../../../widgets/paisa_color_picker.dart';
-import '../../../widgets/paisa_text_field.dart';
+import '../../../widgets/sika_purse_big_button_widget.dart';
+import '../../../widgets/sika_purse_bottom_sheet.dart';
+import '../../../widgets/sika_purse_color_picker.dart';
+import '../../../widgets/sika_purse_text_field.dart';
 import '../../bloc/accounts_bloc.dart';
 import '../../widgets/card_type_drop_down.dart';
 
@@ -72,10 +72,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                   leading: const Icon(Icons.info_rounded),
                   title: Text(
                     context.loc.accountInformationTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -106,7 +103,7 @@ class AddAccountPageState extends State<AddAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
         create: (context) => accountsBloc,
@@ -114,9 +111,7 @@ class AddAccountPageState extends State<AddAccountPage> {
           listener: (context, state) {
             if (state is AccountAddedState) {
               context.showMaterialSnackBar(
-                isAccountAddOrUpdate
-                    ? context.loc.addedAccount
-                    : context.loc.updateAccount,
+                isAccountAddOrUpdate ? context.loc.addedAccount : context.loc.updateAccount,
                 backgroundColor: context.primaryContainer,
                 color: context.onPrimaryContainer,
               );
@@ -137,37 +132,30 @@ class AddAccountPageState extends State<AddAccountPage> {
               );
             } else if (state is AccountSuccessState) {
               accountNameController.text = state.account.bankName;
-              accountNameController.selection = TextSelection.collapsed(
-                  offset: state.account.bankName.length);
+              accountNameController.selection = TextSelection.collapsed(offset: state.account.bankName.length);
 
               accountNumberController.text = state.account.number;
-              accountNumberController.selection =
-                  TextSelection.collapsed(offset: state.account.number.length);
+              accountNumberController.selection = TextSelection.collapsed(offset: state.account.number.length);
 
               accountHolderController.text = state.account.name;
-              accountHolderController.selection =
-                  TextSelection.collapsed(offset: state.account.name.length);
+              accountHolderController.selection = TextSelection.collapsed(offset: state.account.name.length);
 
-              accountInitialAmountController.text =
-                  state.account.amount.toString();
+              accountInitialAmountController.text = state.account.amount.toString();
               accountInitialAmountController.selection =
-                  TextSelection.collapsed(
-                      offset: state.account.amount.toString().length);
+                  TextSelection.collapsed(offset: state.account.amount.toString().length);
             }
           },
           builder: (context, state) {
             return ScreenTypeLayout(
               mobile: Scaffold(
                 appBar: context.materialYouAppBar(
-                  isAccountAddOrUpdate
-                      ? context.loc.addAccount
-                      : context.loc.updateAccount,
+                  isAccountAddOrUpdate ? context.loc.addAccount : context.loc.updateAccount,
                   actions: [
                     isAccountAddOrUpdate
                         ? const SizedBox.shrink()
                         : IconButton(
                             onPressed: () {
-                              paisaAlertDialog(
+                              sikaPurseAlertDialog(
                                 context,
                                 title: Text(context.loc.dialogDeleteTitle),
                                 child: RichText(
@@ -176,9 +164,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     style: context.bodyMedium,
                                     children: [
                                       TextSpan(
-                                        text: BlocProvider.of<AccountsBloc>(
-                                                context)
-                                            .accountName,
+                                        text: BlocProvider.of<AccountsBloc>(context).accountName,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -188,13 +174,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 ),
                                 confirmationButton: TextButton(
                                   style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
                                   ),
                                   onPressed: () {
-                                    BlocProvider.of<AccountsBloc>(context).add(
-                                        DeleteAccountEvent(
-                                            int.parse(widget.accountId!)));
+                                    BlocProvider.of<AccountsBloc>(context)
+                                        .add(DeleteAccountEvent(int.parse(widget.accountId!)));
 
                                     Navigator.pop(context);
                                   },
@@ -224,18 +208,14 @@ class AddAccountPageState extends State<AddAccountPage> {
                         child: CardTypeButtons(),
                       ),
                       ListTile(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         onTap: () async {
-                          final color = await paisaColorPicker(
+                          final color = await sikaPurseColorPicker(
                             context,
-                            defaultColor: BlocProvider.of<AccountsBloc>(context)
-                                    .selectedColor ??
-                                Colors.red.value,
+                            defaultColor: BlocProvider.of<AccountsBloc>(context).selectedColor ?? Colors.red.value,
                           );
                           if (context.mounted) {
-                            BlocProvider.of<AccountsBloc>(context)
-                                .add(AccountColorSelectedEvent(color));
+                            BlocProvider.of<AccountsBloc>(context).add(AccountColorSelectedEvent(color));
                           }
                         },
                         leading: Icon(
@@ -253,9 +233,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                           height: 32,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Color(BlocProvider.of<AccountsBloc>(context)
-                                    .selectedColor ??
-                                Colors.red.value),
+                            color: Color(BlocProvider.of<AccountsBloc>(context).selectedColor ?? Colors.red.value),
                           ),
                         ),
                       ),
@@ -281,8 +259,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                               const SizedBox(height: 16),
                               Builder(
                                 builder: (context) {
-                                  if (state is UpdateCardTypeState &&
-                                      state.cardType == CardType.bank) {
+                                  if (state is UpdateCardTypeState && state.cardType == CardType.bank) {
                                     return AccountNumberWidget(
                                       controller: accountNumberController,
                                     );
@@ -293,8 +270,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                               ),
                               const SizedBox(height: 16),
                               AccountDefaultSwitchWidget(
-                                accountId:
-                                    int.tryParse(widget.accountId ?? '') ?? -1,
+                                accountId: int.tryParse(widget.accountId ?? '') ?? -1,
                               ),
                             ],
                           ),
@@ -306,27 +282,22 @@ class AddAccountPageState extends State<AddAccountPage> {
                 bottomNavigationBar: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    child: SikaPurseBigButton(
                       onPressed: () {
                         final isValid = _form.currentState!.validate();
                         if (!isValid) {
                           return;
                         }
-                        BlocProvider.of<AccountsBloc>(context)
-                            .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                        BlocProvider.of<AccountsBloc>(context).add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                       },
-                      title: isAccountAddOrUpdate
-                          ? context.loc.add
-                          : context.loc.update,
+                      title: isAccountAddOrUpdate ? context.loc.add : context.loc.update,
                     ),
                   ),
                 ),
               ),
               tablet: Scaffold(
                 appBar: context.materialYouAppBar(
-                  isAccountAddOrUpdate
-                      ? context.loc.addAccount
-                      : context.loc.updateAccount,
+                  isAccountAddOrUpdate ? context.loc.addAccount : context.loc.updateAccount,
                   actions: [
                     IconButton(
                       onPressed: _showInfo,
@@ -336,7 +307,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         ? const SizedBox.shrink()
                         : IconButton(
                             onPressed: () {
-                              paisaAlertDialog(
+                              sikaPurseAlertDialog(
                                 context,
                                 title: Text(context.loc.dialogDeleteTitle),
                                 child: RichText(
@@ -345,9 +316,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                                     style: context.bodyMedium,
                                     children: [
                                       TextSpan(
-                                        text: BlocProvider.of<AccountsBloc>(
-                                                context)
-                                            .accountName,
+                                        text: BlocProvider.of<AccountsBloc>(context).accountName,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -357,13 +326,11 @@ class AddAccountPageState extends State<AddAccountPage> {
                                 ),
                                 confirmationButton: TextButton(
                                   style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
                                   ),
                                   onPressed: () {
-                                    BlocProvider.of<AccountsBloc>(context).add(
-                                        DeleteAccountEvent(
-                                            int.parse(widget.accountId!)));
+                                    BlocProvider.of<AccountsBloc>(context)
+                                        .add(DeleteAccountEvent(int.parse(widget.accountId!)));
 
                                     Navigator.pop(context);
                                   },
@@ -381,18 +348,15 @@ class AddAccountPageState extends State<AddAccountPage> {
                 bottomNavigationBar: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    child: SikaPurseBigButton(
                       onPressed: () {
                         final isValid = _form.currentState!.validate();
                         if (!isValid) {
                           return;
                         }
-                        BlocProvider.of<AccountsBloc>(context)
-                            .add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
+                        BlocProvider.of<AccountsBloc>(context).add(AddOrUpdateAccountEvent(isAccountAddOrUpdate));
                       },
-                      title: isAccountAddOrUpdate
-                          ? context.loc.add
-                          : context.loc.update,
+                      title: isAccountAddOrUpdate ? context.loc.add : context.loc.update,
                     ),
                   ),
                 ),
@@ -404,8 +368,7 @@ class AddAccountPageState extends State<AddAccountPage> {
                         child: Form(
                           key: _form,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -456,15 +419,14 @@ class AccountCardHolderNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        return PaisaTextFormField(
+        return SikaPurseTextFormField(
           controller: controller,
           hintText: context.loc.enterCardHolderName,
           keyboardType: TextInputType.name,
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
           ],
-          onChanged: (value) =>
-              BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
+          onChanged: (value) => BlocProvider.of<AccountsBloc>(context).accountHolderName = value,
         );
       },
     );
@@ -483,15 +445,14 @@ class AccountNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        return PaisaTextFormField(
+        return SikaPurseTextFormField(
           controller: controller,
           hintText: context.loc.enterAccountName,
           keyboardType: TextInputType.name,
           inputFormatters: [
             FilteringTextInputFormatter.singleLineFormatter,
           ],
-          onChanged: (value) =>
-              BlocProvider.of<AccountsBloc>(context).accountName = value,
+          onChanged: (value) => BlocProvider.of<AccountsBloc>(context).accountName = value,
         );
       },
     );
@@ -508,7 +469,7 @@ class AccountNumberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
+    return SikaPurseTextFormField(
       maxLength: 4,
       controller: controller,
       inputFormatters: [
@@ -516,8 +477,7 @@ class AccountNumberWidget extends StatelessWidget {
       ],
       hintText: context.loc.enterNumberOptional,
       keyboardType: TextInputType.number,
-      onChanged: (value) =>
-          BlocProvider.of<AccountsBloc>(context).accountNumber = value,
+      onChanged: (value) => BlocProvider.of<AccountsBloc>(context).accountNumber = value,
     );
   }
 }
@@ -532,7 +492,7 @@ class AccountInitialAmountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
+    return SikaPurseTextFormField(
       controller: controller,
       hintText: context.loc.enterAmount,
       keyboardType: TextInputType.number,
@@ -564,14 +524,11 @@ class AccountDefaultSwitchWidget extends StatefulWidget {
   final int accountId;
 
   @override
-  State<AccountDefaultSwitchWidget> createState() =>
-      _AccountDefaultSwitchWidgetState();
+  State<AccountDefaultSwitchWidget> createState() => _AccountDefaultSwitchWidgetState();
 }
 
-class _AccountDefaultSwitchWidgetState
-    extends State<AccountDefaultSwitchWidget> {
-  late bool isAccountDefault =
-      settingsController.defaultAccountId == widget.accountId;
+class _AccountDefaultSwitchWidgetState extends State<AccountDefaultSwitchWidget> {
+  late bool isAccountDefault = settingsController.defaultAccountId == widget.accountId;
 
   final SettingsController settingsController = getIt.get();
 

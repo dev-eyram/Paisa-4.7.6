@@ -19,39 +19,32 @@ import '../../data/recurring/model/recurring.dart';
 abstract class HiveBoxModule {
   @singleton
   @preResolve
-  Future<Box<ExpenseModel>> get expenseBox =>
-      Hive.openBox<ExpenseModel>(BoxType.expense.name);
+  Future<Box<ExpenseModel>> get expenseBox => Hive.openBox<ExpenseModel>(BoxType.expense.name);
 
   @singleton
   @preResolve
-  Future<Box<AccountModel>> get accountBox =>
-      Hive.openBox<AccountModel>(BoxType.accounts.name);
+  Future<Box<AccountModel>> get accountBox => Hive.openBox<AccountModel>(BoxType.accounts.name);
 
   @singleton
   @preResolve
-  Future<Box<CategoryModel>> get categoryBox =>
-      Hive.openBox<CategoryModel>(BoxType.category.name);
+  Future<Box<CategoryModel>> get categoryBox => Hive.openBox<CategoryModel>(BoxType.category.name);
 
   @singleton
   @preResolve
-  Future<Box<DebtModel>> get debtsBox =>
-      Hive.openBox<DebtModel>(BoxType.debts.name);
+  Future<Box<DebtModel>> get debtsBox => Hive.openBox<DebtModel>(BoxType.debts.name);
 
   @singleton
   @preResolve
-  Future<Box<TransactionsModel>> get transactionsBox =>
-      Hive.openBox<TransactionsModel>(BoxType.transactions.name);
+  Future<Box<TransactionsModel>> get transactionsBox => Hive.openBox<TransactionsModel>(BoxType.transactions.name);
 
   @singleton
   @preResolve
-  Future<Box<RecurringModel>> get recurringBox =>
-      Hive.openBox<RecurringModel>(BoxType.recurring.name);
+  Future<Box<RecurringModel>> get recurringBox => Hive.openBox<RecurringModel>(BoxType.recurring.name);
 
   @singleton
   @preResolve
   @Named('settings')
-  Future<Box<dynamic>> get boxDynamic =>
-      Hive.openBox<dynamic>(BoxType.settings.name);
+  Future<Box<dynamic>> get boxDynamic => Hive.openBox<dynamic>(BoxType.settings.name);
 }
 
 class HiveAdapters {
@@ -73,9 +66,9 @@ class HiveAdapters {
 
   String? get hivePath {
     if (kIsWeb) {
-      return 'paisa';
+      return 'sika_purse';
     } else if (TargetPlatform.windows == defaultTargetPlatform) {
-      return 'paisa';
+      return 'sika_purse';
     } else {
       return null;
     }

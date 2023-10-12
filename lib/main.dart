@@ -11,5 +11,5 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configInjector(getIt);
   getIt.get<RecurringRepository>().checkForRecurring();
-  runApp(const PaisaApp());
+  runApp(const SikaPurseApp());
 }

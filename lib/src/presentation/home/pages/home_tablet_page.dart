@@ -5,9 +5,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../widgets/paisa_icon_title.dart';
-import '../../widgets/paisa_search_bar.dart';
-import '../../widgets/paisa_user_widget.dart';
+import '../../widgets/sika_purse_icon_title.dart';
+import '../../widgets/sika_purse_search_bar.dart';
+import '../../widgets/sika_purse_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
 import 'home_page.dart';
@@ -29,11 +29,11 @@ class HomeTabletPage extends StatelessWidget {
       appBar: AppBar(
         leading: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: PaisaIcon(),
+          child: SikaPurseIcon(),
         ),
         leadingWidth: 86,
-        title: const PaisaSearchBar(),
-        actions: const [PaisaUserWidget()],
+        title: const SikaPurseSearchBar(),
+        actions: const [SikaPurseUserWidget()],
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
@@ -49,8 +49,7 @@ class HomeTabletPage extends StatelessWidget {
                 labelType: NavigationRailLabelType.all,
                 backgroundColor: context.surface,
                 selectedIndex: homeBloc.selectedIndex,
-                onDestinationSelected: (index) =>
-                    homeBloc.add(CurrentIndexEvent(index)),
+                onDestinationSelected: (index) => homeBloc.add(CurrentIndexEvent(index)),
                 minWidth: 55,
                 useIndicator: true,
                 groupAlignment: 1,

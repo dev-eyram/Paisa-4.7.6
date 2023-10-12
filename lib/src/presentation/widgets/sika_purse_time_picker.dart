@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-Future<TimeOfDay?> paisaTimerPicker(
+Future<TimeOfDay?> sikaPurseTimerPicker(
   BuildContext context,
 ) {
   return showTimePicker(
@@ -21,8 +21,7 @@ Future<TimeOfDay?> paisaTimerPicker(
             hourMinuteTextStyle: GoogleFonts.outfit(
               textStyle: context.headlineMedium,
             ),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             hourMinuteShape: const CircleBorder(),
           ),
         ),

@@ -7,7 +7,7 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/settings/authenticate.dart';
-import '../../widgets/paisa_big_button_widget.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
 
 class BiometricPage extends StatefulWidget {
   const BiometricPage({super.key});
@@ -44,7 +44,7 @@ class _BiometricPageState extends State<BiometricPage> {
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: PaisaBigButton(
+          child: SikaPurseBigButton(
             onPressed: () {
               checkBiometrics();
             },
@@ -64,7 +64,7 @@ class _BiometricPageState extends State<BiometricPage> {
             ),
           ),
           Text(
-            context.loc.paisaLocked,
+            context.loc.sikaPurseLocked,
             style: GoogleFonts.outfit(
               textStyle: context.headlineSmall,
             ),

@@ -8,7 +8,7 @@ import '../../../core/enum/filter_expense.dart';
 import '../../../data/expense/model/expense_model.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_card.dart';
 import '../cubit/budget_cubit.dart';
 import '../widgets/filter_budget_widget.dart';
 import '../widgets/filter_date_range_widget.dart';
@@ -124,17 +124,15 @@ class BarChartSample2State extends State<BarChartSample2> {
   @override
   void initState() {
     super.initState();
-    expensePoints.addAll(widget.expenses.expenseList
-        .map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
-    incomePoints.addAll(widget.expenses.incomeList
-        .map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
+    expensePoints.addAll(widget.expenses.expenseList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
+    incomePoints.addAll(widget.expenses.incomeList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: PaisaFilledCard(
+      child: SikaPurseFilledCard(
         child: BezierChart(
           bezierChartScale: BezierChartScale.monthly,
           fromDate: widget.expenses.last.time,
@@ -159,18 +157,9 @@ class BarChartSample2State extends State<BarChartSample2> {
           ],
           config: BezierChartConfig(
             bubbleIndicatorColor: context.surface,
-            bubbleIndicatorValueStyle: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: context.primary),
-            bubbleIndicatorTitleStyle: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: context.onSurface),
-            bubbleIndicatorLabelStyle: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .copyWith(color: context.onSurface),
+            bubbleIndicatorValueStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.primary),
+            bubbleIndicatorTitleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: context.onSurface),
+            bubbleIndicatorLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.onSurface),
             verticalIndicatorStrokeWidth: 2.0,
             showVerticalIndicator: true,
             contentWidth: MediaQuery.of(context).size.width * 2,

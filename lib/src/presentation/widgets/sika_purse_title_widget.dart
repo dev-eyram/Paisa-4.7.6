@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../home/bloc/home_bloc.dart';
 
-class PaisaTitleWidget extends StatelessWidget {
-  const PaisaTitleWidget({super.key});
+class SikaPurseTitleWidget extends StatelessWidget {
+  const SikaPurseTitleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,13 +12,8 @@ class PaisaTitleWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is CurrentIndexState) {
           return Text(
-            BlocProvider.of<HomeBloc>(context)
-                .getPageFromIndex(state.currentPage)
-                .name(context),
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
+            BlocProvider.of<HomeBloc>(context).getPageFromIndex(state.currentPage).name(context),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
           );
         }
         return const SizedBox.shrink();

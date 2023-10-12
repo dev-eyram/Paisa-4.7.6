@@ -11,7 +11,7 @@ import '../settings/bloc/settings_controller.dart';
 
 enum UserMenuPopup { debts, chooseTheme, settings, userDetails }
 
-Future<void> paisaBottomSheet(
+Future<void> sikaPurseBottomSheet(
   BuildContext context,
   Widget child,
 ) =>
@@ -33,7 +33,7 @@ Future<void> paisaBottomSheet(
       ),
     );
 
-Future<T?> paisaAlertDialog<T>(
+Future<T?> sikaPurseAlertDialog<T>(
   BuildContext context, {
   required Widget child,
   required Widget title,
@@ -72,9 +72,7 @@ Future<void> showUserDialog(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: MediaQuery.of(context)
-              .viewInsets
-              .copyWith(top: kToolbarHeight + 16),
+          padding: MediaQuery.of(context).viewInsets.copyWith(top: kToolbarHeight + 16),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: FractionallySizedBox(
@@ -95,23 +93,17 @@ Future<void> showUserDialog(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ValueListenableBuilder<Box>(
-                            valueListenable: getIt
-                                .get<Box<dynamic>>(
-                                    instanceName: BoxType.settings.name)
-                                .listenable(
+                            valueListenable: getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
                               keys: [userImageKey, userNameKey],
                             ),
                             builder: (context, value, _) {
-                              String image =
-                                  value.get(userImageKey, defaultValue: '');
+                              String image = value.get(userImageKey, defaultValue: '');
                               if (image == 'no-image') {
                                 image = '';
                               }
-                              final name =
-                                  value.get(userNameKey, defaultValue: 'Name');
+                              final name = value.get(userNameKey, defaultValue: 'Name');
                               return ListTile(
-                                onTap: () => userMenuPopup
-                                    .call(UserMenuPopup.userDetails),
+                                onTap: () => userMenuPopup.call(UserMenuPopup.userDetails),
                                 leading: Builder(
                                   builder: (context) {
                                     if (image.isEmpty) {
@@ -119,14 +111,10 @@ Future<void> showUserDialog(
                                         child: Container(
                                           width: 42,
                                           height: 42,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondaryContainer,
+                                          color: Theme.of(context).colorScheme.secondaryContainer,
                                           child: Icon(
                                             Icons.account_circle_outlined,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondaryContainer,
+                                            color: Theme.of(context).colorScheme.onSecondaryContainer,
                                           ),
                                         ),
                                       );
@@ -134,8 +122,7 @@ Future<void> showUserDialog(
                                       return Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: CircleAvatar(
-                                          foregroundImage:
-                                              FileImage(File(image)),
+                                          foregroundImage: FileImage(File(image)),
                                         ),
                                       );
                                     }
@@ -155,10 +142,7 @@ Future<void> showUserDialog(
                             ),
                             title: Text(
                               context.loc.debts,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: context.onSurface,
                                   ),
                             ),
@@ -166,27 +150,20 @@ Future<void> showUserDialog(
                           const Divider(),
                           ListTile(
                             dense: true,
-                            onTap: () =>
-                                userMenuPopup(UserMenuPopup.chooseTheme),
+                            onTap: () => userMenuPopup(UserMenuPopup.chooseTheme),
                             leading: Icon(
-                              isDarkMode
-                                  ? MdiIcons.brightness5
-                                  : MdiIcons.brightness4,
+                              isDarkMode ? MdiIcons.brightness5 : MdiIcons.brightness4,
                               color: context.onSurface,
                             ),
                             title: Text(
                               context.loc.chooseTheme,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: context.onSurface,
                                   ),
                             ),
                           ),
                           ListTile(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 16),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                             dense: true,
                             onTap: () => userMenuPopup(UserMenuPopup.settings),
                             leading: Icon(
@@ -195,10 +172,7 @@ Future<void> showUserDialog(
                             ),
                             title: Text(
                               context.loc.settings,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: context.onSurface,
                                   ),
                             ),

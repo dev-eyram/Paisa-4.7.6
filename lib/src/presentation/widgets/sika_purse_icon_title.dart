@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/common.dart';
 import '../home/bloc/home_bloc.dart';
 
-class PaisaIconTitle extends StatelessWidget {
-  const PaisaIconTitle({super.key});
+class SikaPurseIconTitle extends StatelessWidget {
+  const SikaPurseIconTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class PaisaIconTitle extends StatelessWidget {
   }
 }
 
-class PaisaTitle extends StatelessWidget {
-  const PaisaTitle({super.key});
+class SikaPurseTitle extends StatelessWidget {
+  const SikaPurseTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,7 @@ class PaisaTitle extends StatelessWidget {
       builder: (context, state) {
         String title = PageType.home.name(context);
         if (state is CurrentIndexState) {
-          title = BlocProvider.of<HomeBloc>(context)
-              .getPageFromIndex(state.currentPage)
-              .name(context);
+          title = BlocProvider.of<HomeBloc>(context).getPageFromIndex(state.currentPage).name(context);
         }
         return Text(
           title,
@@ -58,8 +56,8 @@ class PaisaTitle extends StatelessWidget {
   }
 }
 
-class PaisaIcon extends StatelessWidget {
-  const PaisaIcon({super.key});
+class SikaPurseIcon extends StatelessWidget {
+  const SikaPurseIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

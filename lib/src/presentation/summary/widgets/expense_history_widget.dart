@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/filter_expense.dart';
 import '../../../domain/expense/entities/expense.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import 'expense_month_card.dart';
 
 class ExpenseHistoryWidget extends StatelessWidget {
@@ -24,8 +24,7 @@ class ExpenseHistoryWidget extends StatelessWidget {
         description: context.loc.emptyExpensesMessageSubTitle,
       );
     } else {
-      final maps = groupBy(expenses,
-          (Expense element) => element.time.formatted(FilterExpense.monthly));
+      final maps = groupBy(expenses, (Expense element) => element.time.formatted(FilterExpense.monthly));
       return ListView.separated(
         separatorBuilder: (context, index) => const Divider(),
         shrinkWrap: true,

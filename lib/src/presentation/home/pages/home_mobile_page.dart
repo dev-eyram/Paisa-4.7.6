@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
-import '../../widgets/paisa_icon_title.dart';
-import '../../widgets/paisa_search_button_widget.dart';
-import '../../widgets/paisa_user_widget.dart';
+import '../../widgets/sika_purse_icon_title.dart';
+import '../../widgets/sika_purse_search_button_widget.dart';
+import '../../widgets/sika_purse_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
 import 'home_page.dart';
@@ -27,10 +27,10 @@ class HomeMobilePage extends StatelessWidget {
     final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const PaisaTitle(),
+        title: const SikaPurseTitle(),
         actions: const [
-          PaisaSearchButtonWidget(),
-          PaisaUserWidget(),
+          SikaPurseSearchButtonWidget(),
+          SikaPurseUserWidget(),
           SizedBox(width: 8),
         ],
       ),
@@ -44,7 +44,7 @@ class HomeMobilePage extends StatelessWidget {
                 Navigator.pop(context);
               },
               children: [
-                const PaisaIconTitle(),
+                const SikaPurseIconTitle(),
                 ...destinations
                     .map((e) => NavigationDrawerDestination(
                           icon: e.icon,
@@ -79,9 +79,7 @@ class HomeMobilePage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is CurrentIndexState &&
-              (state.currentPage == 4 ||
-                  state.currentPage == 6 ||
-                  state.currentPage == 5)) {
+              (state.currentPage == 4 || state.currentPage == 5 || state.currentPage == 6 || state.currentPage == 7)) {
             return const SizedBox.shrink();
           }
           return Theme(
@@ -92,10 +90,9 @@ class HomeMobilePage extends StatelessWidget {
               elevation: 1,
               backgroundColor: context.surface,
               selectedIndex: homeBloc.selectedIndex,
-              onDestinationSelected: (index) =>
-                  homeBloc.add(CurrentIndexEvent(index)),
+              onDestinationSelected: (index) => homeBloc.add(CurrentIndexEvent(index)),
               destinations: destinations
-                  .sublist(0, 4)
+                  .sublist(0, 5)
                   .map((e) => NavigationDestination(
                         icon: e.icon,
                         selectedIcon: e.selectedIcon,

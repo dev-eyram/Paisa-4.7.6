@@ -12,8 +12,8 @@ import '../../../../core/enum/box_types.dart';
 import '../../../../data/category/data_sources/category_local_data_source.dart';
 import '../../../../data/category/data_sources/default_category.dart';
 import '../../../../data/category/model/category_model.dart';
-import '../../../widgets/paisa_big_button_widget.dart';
-import '../../../widgets/paisa_card.dart';
+import '../../../widgets/sika_purse_big_button_widget.dart';
+import '../../../widgets/sika_purse_card.dart';
 
 class CategorySelectorPage extends StatefulWidget {
   const CategorySelectorPage({super.key});
@@ -33,7 +33,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
       appBar: context.materialYouAppBar(
         context.loc.categories,
         actions: [
-          PaisaButton(
+          SikaPurseButton(
             onPressed: () async {
               context.go(accountSelectorPath);
               await settings.put(userCategorySelectorKey, false);
@@ -49,7 +49,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
         mobile: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: PaisaBigButton(
+            child: SikaPurseBigButton(
               onPressed: () async {
                 context.go(accountSelectorPath);
                 await settings.put(userCategorySelectorKey, false);
@@ -75,7 +75,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                 ),
               ),
               ScreenTypeLayout(
-                mobile: PaisaFilledCard(
+                mobile: SikaPurseFilledCard(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: categoryModels.length,
@@ -143,8 +143,7 @@ class _CategorySelectorPageState extends State<CategorySelectorPage> {
                               ),
                             ),
                             showCheckmark: false,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             labelStyle: context.titleMedium,
                             padding: const EdgeInsets.all(12),
                             avatar: Icon(
@@ -193,7 +192,7 @@ class CategoryItemWidget extends StatelessWidget {
         title: Text(model.name),
         trailing: const Icon(MdiIcons.delete),
       ),
-      tablet: PaisaCard(
+      tablet: SikaPurseCard(
         child: InkWell(
           onTap: onPress,
           child: Padding(

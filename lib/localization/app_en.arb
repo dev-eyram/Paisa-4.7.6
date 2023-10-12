@@ -430,33 +430,9 @@
         "type": "text",
         "placeholders": {}
     },
-    "telegram": "Telegram",
-    "@telegram": {
-        "description": "Title text shown on settings page for telegram button",
-        "type": "text",
-        "placeholders": {}
-    },
-    "telegramGroup": "A group to follow and post bugs and feature requests",
-    "@telegramGroup": {
-        "description": "Subtitle text shown on settings page for telegram button",
-        "type": "text",
-        "placeholders": {}
-    },
     "privacyPolicy": "Privacy & Policy",
     "@privacyPolicy": {
         "description": "Title text shown on settings page for privacy and policy button",
-        "type": "text",
-        "placeholders": {}
-    },
-    "github": "Github",
-    "@github": {
-        "description": "Title text shown on settings page for github button ",
-        "type": "text",
-        "placeholders": {}
-    },
-    "githubText": "Fork the project on GitHub",
-    "@githubText": {
-        "description": "Subtitle text shown on the github button",
         "type": "text",
         "placeholders": {}
     },
@@ -967,7 +943,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Paisa then this file will be invalid to import.",
+    "backupAndRestoreJSONDesc": "The file will be a plain JSON file created and exported to save. Please note that if in case anything changes happen in the future in Sika Purse then this file will be invalid to import.",
     "@backupAndRestoreJSONDesc": {
         "description": "Message shown on the import and export screen",
         "type": "text",
@@ -1045,8 +1021,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "paisaLocked": "Sika Locked",
-    "@paisaLocked": {
+    "sikaPurseLocked": "Sika Locked",
+    "@sikaPurseLocked": {
         "description": "Text shown on the title section of biometric screen",
         "type": "text",
         "placeholders": {}

@@ -40,6 +40,8 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
         break;
       case 5:
         break;
+      case 7:
+        break;
     }
   }
 
@@ -56,8 +58,7 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (_, child) {
         return Theme(
-          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme)
-              .copyWith(
+          data: ThemeData.from(colorScheme: Theme.of(context).colorScheme).copyWith(
             appBarTheme: Theme.of(context).appBarTheme,
           ),
           child: child!,
@@ -73,7 +74,7 @@ class HomeFloatingActionButtonWidget extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<HomeBloc>(context),
       builder: (context, state) {
-        if (state is CurrentIndexState && state.currentPage != 5) {
+        if (state is CurrentIndexState && state.currentPage != 5 && state.currentPage != 7) {
           return SmallSizeFab(
             onPressed: () => _handleClick(context, state.currentPage),
             icon: state.currentPage != 3 ? Icons.add : Icons.date_range,

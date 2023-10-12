@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_color_picker.dart';
+import '../../widgets/sika_purse_color_picker.dart';
 import '../bloc/category_bloc.dart';
 
 class ColorPickerWidget extends StatelessWidget {
@@ -16,9 +16,7 @@ class ColorPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
-          current is CategoryColorSelectedState ||
-          current is CategorySuccessState,
+      buildWhen: (previous, current) => current is CategoryColorSelectedState || current is CategorySuccessState,
       bloc: categoryBloc,
       builder: (context, state) {
         int color = Colors.red.value;
@@ -31,9 +29,8 @@ class ColorPickerWidget extends StatelessWidget {
         return ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           onTap: () {
-            paisaColorPicker(context).then((color) =>
-                BlocProvider.of<CategoryBloc>(context)
-                    .add(CategoryColorSelectedEvent(color)));
+            sikaPurseColorPicker(context)
+                .then((color) => BlocProvider.of<CategoryBloc>(context).add(CategoryColorSelectedEvent(color)));
           },
           leading: Icon(
             Icons.color_lens,

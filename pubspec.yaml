@@ -1,4 +1,4 @@
-name: paisa
+name: sika_purse
 description: A expense manager app for Android, iOS, Web & Windows.
 
 publish_to: "none"
@@ -69,7 +69,7 @@ dependency_overrides:
   material_color_utilities: ^0.2.0
 
 flutter_app_name:
-  name: "Paisa"
+  name: "Sika Purse"
 
 flutter_native_splash:
   color: "#ffffff"

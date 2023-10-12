@@ -2,7 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/main.dart';
+import 'package:sika_purse/main.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../data/settings/file_handler.dart';
@@ -17,11 +17,8 @@ class DataCubit extends Cubit<DataState> {
     emit(const DataLoadingState(true));
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     deviceInfo.androidInfo.then((androidInfo) {
-      Permission.manageExternalStorage
-          .request()
-          .then((statusManageExternalStorage) {
-        if (statusManageExternalStorage.isGranted &&
-            androidInfo.version.sdkInt > 29) {
+      Permission.manageExternalStorage.request().then((statusManageExternalStorage) {
+        if (statusManageExternalStorage.isGranted && androidInfo.version.sdkInt > 29) {
           _importFile();
         } else if (androidInfo.version.sdkInt < 30) {
           Permission.storage.request().isGranted.then((value) {
@@ -40,11 +37,8 @@ class DataCubit extends Cubit<DataState> {
     emit(const DataLoadingState(false));
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     deviceInfo.androidInfo.then((androidInfo) {
-      Permission.manageExternalStorage
-          .request()
-          .then((statusManageExternalStorage) {
-        if (statusManageExternalStorage.isGranted &&
-            androidInfo.version.sdkInt > 29) {
+      Permission.manageExternalStorage.request().then((statusManageExternalStorage) {
+        if (statusManageExternalStorage.isGranted && androidInfo.version.sdkInt > 29) {
           _exportFile();
         } else if (androidInfo.version.sdkInt < 30) {
           Permission.storage.request().isGranted.then((value) {

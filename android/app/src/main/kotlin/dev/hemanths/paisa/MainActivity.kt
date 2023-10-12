@@ -1,4 +1,4 @@
-package dev.hemanths.paisa
+package com.codehaven.sikapurse
 
 import android.os.Build
 import android.os.Bundle

@@ -6,8 +6,8 @@ import '../settings/bloc/settings_controller.dart';
 import '../settings/widgets/user_profile_widget.dart';
 import 'color_palette.dart';
 
-class PaisaUserWidget extends StatelessWidget {
-  const PaisaUserWidget({super.key});
+class SikaPurseUserWidget extends StatelessWidget {
+  const SikaPurseUserWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,7 @@ class PaisaUserWidget extends StatelessWidget {
       },
       onTap: () => showModalBottomSheet(
         constraints: BoxConstraints(
-          maxWidth:
-              MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
+          maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
         ),
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(

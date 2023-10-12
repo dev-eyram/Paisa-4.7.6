@@ -7,9 +7,9 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/transaction_type.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
+import '../../widgets/sika_purse_bottom_sheet.dart';
 import '../bloc/expense_bloc.dart';
 import '../widgets/expense_amount_widget.dart';
 import '../widgets/expense_date_picker_widget.dart';
@@ -57,8 +57,7 @@ class _ExpensePageState extends State<ExpensePage> {
   void initState() {
     super.initState();
     expenseBloc
-      ..add(
-          ChangeExpenseEvent(widget.transactionType ?? TransactionType.expense))
+      ..add(ChangeExpenseEvent(widget.transactionType ?? TransactionType.expense))
       ..add(FetchExpenseFromIdEvent(widget.expenseId));
   }
 
@@ -66,7 +65,7 @@ class _ExpensePageState extends State<ExpensePage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => expenseBloc,
-      child: PaisaAnnotatedRegionWidget(
+      child: SikaPurseAnnotatedRegionWidget(
         color: context.background,
         child: BlocConsumer<ExpenseBloc, ExpenseState>(
           listener: (context, state) {
@@ -78,9 +77,7 @@ class _ExpensePageState extends State<ExpensePage> {
               );
               context.pop();
             } else if (state is ExpenseAdded) {
-              final content = state.isAddOrUpdate
-                  ? context.loc.addedTransaction
-                  : context.loc.updatedTransaction;
+              final content = state.isAddOrUpdate ? context.loc.addedTransaction : context.loc.updatedTransaction;
               context.showMaterialSnackBar(
                 content,
                 backgroundColor: context.primaryContainer,
@@ -110,24 +107,20 @@ class _ExpensePageState extends State<ExpensePage> {
           },
           builder: (context, state) {
             if (widget.accountId != null) {
-              BlocProvider.of<ExpenseBloc>(context).selectedAccountId =
-                  int.tryParse(widget.accountId!);
+              BlocProvider.of<ExpenseBloc>(context).selectedAccountId = int.tryParse(widget.accountId!);
             }
             if (widget.categoryId != null) {
-              BlocProvider.of<ExpenseBloc>(context).selectedCategoryId =
-                  int.tryParse(widget.categoryId!);
+              BlocProvider.of<ExpenseBloc>(context).selectedCategoryId = int.tryParse(widget.categoryId!);
             }
             return ScreenTypeLayout(
               mobile: Scaffold(
                 appBar: context.materialYouAppBar(
-                  isAddExpense
-                      ? context.loc.addTransaction
-                      : context.loc.updateTransaction,
+                  isAddExpense ? context.loc.addTransaction : context.loc.updateTransaction,
                   actions: [
                     isAddExpense
                         ? const SizedBox.shrink()
                         : IconButton(
-                            onPressed: () => paisaAlertDialog(
+                            onPressed: () => sikaPurseAlertDialog(
                               context,
                               title: Text(context.loc.dialogDeleteTitle),
                               child: RichText(
@@ -138,12 +131,10 @@ class _ExpensePageState extends State<ExpensePage> {
                               ),
                               confirmationButton: TextButton(
                                 style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
                                 ),
                                 onPressed: () {
-                                  BlocProvider.of<ExpenseBloc>(context).add(
-                                      ClearExpenseEvent(widget.expenseId!));
+                                  BlocProvider.of<ExpenseBloc>(context).add(ClearExpenseEvent(widget.expenseId!));
                                   Navigator.pop(context);
                                 },
                                 child: Text(context.loc.delete),
@@ -162,13 +153,11 @@ class _ExpensePageState extends State<ExpensePage> {
                     const TransactionToggleButtons(),
                     const SizedBox(height: 16),
                     BlocBuilder<ExpenseBloc, ExpenseState>(
-                      buildWhen: (previous, current) =>
-                          current is ChangeTransactionTypeState,
+                      buildWhen: (previous, current) => current is ChangeTransactionTypeState,
                       builder: (context, state) {
                         if (state is ChangeTransactionTypeState &&
                             (state.transactionType == TransactionType.expense ||
-                                state.transactionType ==
-                                    TransactionType.income)) {
+                                state.transactionType == TransactionType.income)) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
@@ -197,36 +186,28 @@ class _ExpensePageState extends State<ExpensePage> {
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(
                                   context.loc.fromAccount,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
                               PillsAccountWidget(
                                 accountSelected: (account) {
-                                  BlocProvider.of<ExpenseBloc>(context)
-                                      .fromAccount = account;
+                                  BlocProvider.of<ExpenseBloc>(context).fromAccount = account;
                                 },
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(
                                   context.loc.toAccount,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
                               PillsAccountWidget(
                                 accountSelected: (account) {
-                                  BlocProvider.of<ExpenseBloc>(context)
-                                      .toAccount = account;
+                                  BlocProvider.of<ExpenseBloc>(context).toAccount = account;
                                 },
                               ),
                               const SizedBox(height: 16),
@@ -244,13 +225,11 @@ class _ExpensePageState extends State<ExpensePage> {
                 bottomNavigationBar: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    child: SikaPurseBigButton(
                       onPressed: () {
-                        BlocProvider.of<ExpenseBloc>(context)
-                            .add(AddOrUpdateExpenseEvent(isAddExpense));
+                        BlocProvider.of<ExpenseBloc>(context).add(AddOrUpdateExpenseEvent(isAddExpense));
                       },
-                      title:
-                          isAddExpense ? context.loc.add : context.loc.update,
+                      title: isAddExpense ? context.loc.add : context.loc.update,
                     ),
                   ),
                 ),
@@ -259,13 +238,11 @@ class _ExpensePageState extends State<ExpensePage> {
                 bottomNavigationBar: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: PaisaBigButton(
+                    child: SikaPurseBigButton(
                       onPressed: () {
-                        BlocProvider.of<ExpenseBloc>(context)
-                            .add(AddOrUpdateExpenseEvent(isAddExpense));
+                        BlocProvider.of<ExpenseBloc>(context).add(AddOrUpdateExpenseEvent(isAddExpense));
                       },
-                      title:
-                          isAddExpense ? context.loc.add : context.loc.update,
+                      title: isAddExpense ? context.loc.add : context.loc.update,
                     ),
                   ),
                 ),
@@ -273,11 +250,9 @@ class _ExpensePageState extends State<ExpensePage> {
                   systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,
                     systemNavigationBarColor: Colors.transparent,
-                    statusBarIconBrightness:
-                        MediaQuery.of(context).platformBrightness ==
-                                Brightness.dark
-                            ? Brightness.light
-                            : Brightness.dark,
+                    statusBarIconBrightness: MediaQuery.of(context).platformBrightness == Brightness.dark
+                        ? Brightness.light
+                        : Brightness.dark,
                   ),
                   iconTheme: IconThemeData(
                     color: context.onSurface,
@@ -285,13 +260,8 @@ class _ExpensePageState extends State<ExpensePage> {
                   elevation: 0,
                   backgroundColor: Colors.transparent,
                   title: Text(
-                    isAddExpense
-                        ? context.loc.addTransaction
-                        : context.loc.updateTransaction,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.w700),
+                    isAddExpense ? context.loc.addTransaction : context.loc.updateTransaction,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
                   ),
                   actions: [
                     const TransactionToggleButtons(),
@@ -299,8 +269,7 @@ class _ExpensePageState extends State<ExpensePage> {
                         ? const SizedBox.shrink()
                         : IconButton(
                             onPressed: () {
-                              BlocProvider.of<ExpenseBloc>(context)
-                                  .add(ClearExpenseEvent(widget.expenseId!));
+                              BlocProvider.of<ExpenseBloc>(context).add(ClearExpenseEvent(widget.expenseId!));
                             },
                             icon: Icon(
                               Icons.delete_rounded,
@@ -323,14 +292,11 @@ class _ExpensePageState extends State<ExpensePage> {
                               children: [
                                 ExpenseNameWidget(controller: nameController),
                                 const SizedBox(height: 16),
-                                ExpenseDescriptionWidget(
-                                    controller: descriptionController),
+                                ExpenseDescriptionWidget(controller: descriptionController),
                                 const SizedBox(height: 16),
-                                ExpenseAmountWidget(
-                                    controller: amountController),
+                                ExpenseAmountWidget(controller: amountController),
                                 const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0),
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
                                   child: ExpenseDatePickerWidget(),
                                 ),
                               ],

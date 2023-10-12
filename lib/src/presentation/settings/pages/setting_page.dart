@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/settings/widgets/small_size_fab_widget.dart';
+import 'package:sika_purse/src/presentation/settings/widgets/small_size_fab_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -11,7 +11,7 @@ import '../../../core/enum/box_types.dart';
 import '../../../core/enum/theme_mode.dart';
 import '../../../data/settings/authenticate.dart';
 import '../../widgets/choose_theme_mode_widget.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
 import '../widgets/accounts_style_widget.dart';
 import '../widgets/biometrics_auth_widget.dart';
 import '../widgets/currency_change_widget.dart';
@@ -28,10 +28,9 @@ class SettingsPage extends StatelessWidget {
     final settings = getIt.get<Box<dynamic>>(
       instanceName: BoxType.settings.name,
     );
-    final currentTheme = ThemeMode.values[getIt
-        .get<Box<dynamic>>(instanceName: BoxType.settings.name)
-        .get(themeModeKey, defaultValue: 0)];
-    return PaisaAnnotatedRegionWidget(
+    final currentTheme = ThemeMode
+        .values[getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).get(themeModeKey, defaultValue: 0)];
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
         appBar: context.materialYouAppBar(
@@ -52,9 +51,7 @@ class SettingsPage extends StatelessWidget {
                   onTap: () {
                     showModalBottomSheet(
                       constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width >= 700
-                            ? 700
-                            : double.infinity,
+                        maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
                       ),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -95,52 +92,17 @@ class SettingsPage extends StatelessWidget {
             SettingsGroup(
               title: context.loc.socialLinks,
               options: [
-                SettingsOption(
-                  title: context.loc.appRate,
-                  subtitle: context.loc.appRateDesc,
-                  onTap: () => launchUrl(
-                    Uri.parse(playStoreUrl),
-                    mode: LaunchMode.externalApplication,
-                  ),
-                ),
-                const Divider(),
-                SettingsOption(
-                  title: context.loc.github,
-                  subtitle: context.loc.githubText,
-                  onTap: () => launchUrl(
-                    Uri.parse(gitHubUrl),
-                    mode: LaunchMode.externalApplication,
-                  ),
-                ),
-                const Divider(),
-                SettingsOption(
-                  title: context.loc.telegram,
-                  subtitle: context.loc.telegramGroup,
-                  onTap: () => launchUrl(
-                    Uri.parse(telegramGroupUrl),
-                    mode: LaunchMode.externalApplication,
-                  ),
-                ),
                 const Divider(),
                 SettingsOption(
                   title: context.loc.privacyPolicy,
                   onTap: () => launchUrl(
-                    Uri.parse(termsAndConditionsUrl),
+                    Uri.parse('termsAndConditionsUrl'),
                     mode: LaunchMode.externalApplication,
                   ),
                 ),
                 const Divider(),
                 const VersionWidget(),
               ],
-            ),
-            SafeArea(
-              top: false,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  context.loc.madeWithLoveInIndia,
-                ),
-              ),
             ),
           ],
         ),

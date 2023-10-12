@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-class PaisaCard extends StatelessWidget {
-  const PaisaCard({
+class SikaPurseCard extends StatelessWidget {
+  const SikaPurseCard({
     super.key,
     required this.child,
     this.elevation,
@@ -18,8 +18,7 @@ class PaisaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: shape ??
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      shape: shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       color: color ?? context.surfaceVariant,
       clipBehavior: Clip.antiAlias,
       elevation: elevation ?? 2.0,
@@ -29,8 +28,8 @@ class PaisaCard extends StatelessWidget {
   }
 }
 
-class PaisaOutlineCard extends StatelessWidget {
-  const PaisaOutlineCard({
+class SikaPurseOutlineCard extends StatelessWidget {
+  const SikaPurseOutlineCard({
     super.key,
     required this.child,
     this.shape,
@@ -59,8 +58,8 @@ class PaisaOutlineCard extends StatelessWidget {
   }
 }
 
-class PaisaFilledCard extends StatelessWidget {
-  const PaisaFilledCard({
+class SikaPurseFilledCard extends StatelessWidget {
+  const SikaPurseFilledCard({
     super.key,
     required this.child,
     this.shape,

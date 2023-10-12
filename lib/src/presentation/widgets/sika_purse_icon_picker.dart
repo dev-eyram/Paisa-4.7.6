@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../core/common.dart';
 
-Future<IconData> paisaIconPicker({
+Future<IconData> sikaPurseIconPicker({
   required BuildContext context,
   //required Function(IconData icon) onSelectedIcon,
   IconData defaultIcon = Icons.home_rounded,
@@ -91,9 +91,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
           controller: controller,
           onChanged: (value) {
             iconKeys = widget.iconKeys
-                .where((element) => element
-                    .toLowerCase()
-                    .contains(value.toLowerCase().replaceAll(' ', '')))
+                .where((element) => element.toLowerCase().contains(value.toLowerCase().replaceAll(' ', '')))
                 .toList();
             setState(() {});
           },
@@ -107,8 +105,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
             shrinkWrap: true,
             itemCount: iconKeys.length,
             itemBuilder: (_, index) {
-              final bool isSelected =
-                  selectedIcon == MdiIcons.fromString(iconKeys[index]);
+              final bool isSelected = selectedIcon == MdiIcons.fromString(iconKeys[index]);
               return Container(
                 margin: const EdgeInsets.all(4),
                 decoration: isSelected
@@ -122,9 +119,7 @@ class _IconPickerWidgetState extends State<_IconPickerWidget> {
                     : null,
                 child: IconButton(
                   key: ValueKey(iconKeys[index].hashCode),
-                  color: isSelected
-                      ? context.primary
-                      : Theme.of(context).disabledColor,
+                  color: isSelected ? context.primary : Theme.of(context).disabledColor,
                   onPressed: () {
                     setState(() {
                       selectedIcon = MdiIcons.fromString(iconKeys[index]);

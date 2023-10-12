@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-import 'package:paisa/src/data/accounts/model/account_model.dart';
-import 'package:paisa/src/data/category/model/category_model.dart';
-import 'package:paisa/src/data/expense/model/expense_model.dart';
+import 'package:sika_purse/src/data/accounts/model/account_model.dart';
+import 'package:sika_purse/src/data/category/model/category_model.dart';
+import 'package:sika_purse/src/data/expense/model/expense_model.dart';
 
 class Data {
   Data({
@@ -24,12 +24,9 @@ class Data {
   String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        expenses: List<ExpenseModel>.from(
-            json["expenses"].map((x) => ExpenseModel.fromJson(x))),
-        accounts: List<AccountModel>.from(
-            json["accounts"].map((x) => AccountModel.fromJson(x))),
-        categories: List<CategoryModel>.from(
-            json["categories"].map((x) => CategoryModel.fromJson(x))),
+        expenses: List<ExpenseModel>.from(json["expenses"].map((x) => ExpenseModel.fromJson(x))),
+        accounts: List<AccountModel>.from(json["accounts"].map((x) => AccountModel.fromJson(x))),
+        categories: List<CategoryModel>.from(json["categories"].map((x) => CategoryModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

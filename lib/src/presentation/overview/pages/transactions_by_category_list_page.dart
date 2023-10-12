@@ -6,7 +6,7 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/expense_item_widget.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
 
 class TransactionByCategoryListPage extends StatelessWidget {
   const TransactionByCategoryListPage({
@@ -21,10 +21,9 @@ class TransactionByCategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int cid = int.parse(categoryId);
-    final List<Expense> expenses =
-        summaryController.fetchExpensesFromCategoryId(cid);
+    final List<Expense> expenses = summaryController.fetchExpensesFromCategoryId(cid);
 
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
         appBar: context.materialYouAppBar(context.loc.transactionsByCategory),
@@ -44,10 +43,8 @@ class TransactionByCategoryListPage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: expenses.length,
           itemBuilder: (BuildContext context, int index) {
-            final Account? account =
-                summaryController.fetchAccountFromId(expenses[index].accountId);
-            final Category? category = summaryController
-                .fetchCategoryFromId(expenses[index].categoryId);
+            final Account? account = summaryController.fetchAccountFromId(expenses[index].accountId);
+            final Category? category = summaryController.fetchCategoryFromId(expenses[index].categoryId);
             if (account == null || category == null) {
               return const SizedBox.shrink();
             }

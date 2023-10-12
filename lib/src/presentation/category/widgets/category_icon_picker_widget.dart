@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/app/routes.dart';
+import 'package:sika_purse/src/app/routes.dart';
 
 import '../../../core/common.dart';
 import '../bloc/category_bloc.dart';
@@ -13,9 +13,7 @@ class CategoryIconPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      buildWhen: (previous, current) =>
-          current is CategoryIconSelectedState ||
-          current is CategorySuccessState,
+      buildWhen: (previous, current) => current is CategoryIconSelectedState || current is CategorySuccessState,
       bloc: BlocProvider.of<CategoryBloc>(context),
       builder: (context, state) {
         int codePoint = MdiIcons.home.codePoint;
@@ -38,12 +36,10 @@ class CategoryIconPickerWidget extends StatelessWidget {
             color: context.primary,
           ),
           onTap: () async {
-            final IconData? result =
-                await context.pushNamed<IconData>(iconPickerName);
+            final IconData? result = await context.pushNamed<IconData>(iconPickerName);
             if (result == null) return;
             if (context.mounted) {
-              BlocProvider.of<CategoryBloc>(context)
-                  .add(CategoryIconSelectedEvent(result.codePoint));
+              BlocProvider.of<CategoryBloc>(context).add(CategoryIconSelectedEvent(result.codePoint));
             }
           },
         );

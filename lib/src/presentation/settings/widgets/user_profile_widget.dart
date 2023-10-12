@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_text_field.dart';
-import '../../widgets/paisa_user_image_widget.dart';
+import '../../widgets/sika_purse_text_field.dart';
+import '../../widgets/sika_purse_user_image_widget.dart';
 import '../bloc/settings_controller.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -28,14 +28,11 @@ class UserProfilePage extends StatelessWidget {
       final ImagePicker picker = ImagePicker();
       picker.pickImage(source: ImageSource.gallery).then((pickedFile) {
         if (pickedFile != null) {
-          settings
-              .put(userImageKey, pickedFile.path)
-              .then((value) => Navigator.pop(context));
+          settings.put(userImageKey, pickedFile.path).then((value) => Navigator.pop(context));
         }
       });
     } else {
-      context
-          .showMaterialSnackBar('Not supported in ${Platform.operatingSystem}');
+      context.showMaterialSnackBar('Not supported in ${Platform.operatingSystem}');
     }
   }
 
@@ -64,7 +61,7 @@ class UserProfilePage extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: PaisaTextFormField(
+                    child: SikaPurseTextFormField(
                       controller: controller,
                       hintText: 'Enter name',
                       keyboardType: TextInputType.name,

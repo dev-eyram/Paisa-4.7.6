@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-import '../../widgets/paisa_text_field.dart';
+import '../../widgets/sika_purse_text_field.dart';
 import '../bloc/expense_bloc.dart';
 
 class ExpenseNameWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class ExpenseNameWidget extends StatelessWidget {
         if (state is ChangeTransactionTypeState) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: PaisaTextFormField(
+            child: SikaPurseTextFormField(
               maxLines: 1,
               controller: controller,
               hintText: state.transactionType.hintName(context),
@@ -37,8 +37,7 @@ class ExpenseNameWidget extends StatelessWidget {
                   return context.loc.validName;
                 }
               },
-              onChanged: (value) =>
-                  BlocProvider.of<ExpenseBloc>(context).expenseName = value,
+              onChanged: (value) => BlocProvider.of<ExpenseBloc>(context).expenseName = value,
             ),
           );
         } else {

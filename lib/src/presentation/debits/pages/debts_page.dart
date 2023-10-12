@@ -6,7 +6,7 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/debt_type.dart';
 import '../../../data/debt/models/debt_model.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import '../widgets/debt_list_widget.dart';
 
 class DebtsPage extends StatelessWidget {
@@ -36,14 +36,8 @@ class DebtsPage extends StatelessWidget {
                   indicatorSize: TabBarIndicatorSize.tab,
                   labelColor: context.onPrimary,
                   unselectedLabelColor: context.onSurfaceVariant,
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                  labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                   tabs: [
                     Tab(text: context.loc.debt),
                     Tab(text: context.loc.credit),
@@ -56,13 +50,9 @@ class DebtsPage extends StatelessWidget {
         body: ValueListenableBuilder<Box<DebtModel>>(
           valueListenable: getIt.get<Box<DebtModel>>().listenable(),
           builder: (context, value, child) {
-            final debts = value.values
-                .where((element) => element.debtType == DebtType.debt)
-                .toList();
+            final debts = value.values.where((element) => element.debtType == DebtType.debt).toList();
 
-            final credits = value.values
-                .where((element) => element.debtType == DebtType.credit)
-                .toList();
+            final credits = value.values.where((element) => element.debtType == DebtType.credit).toList();
 
             return TabBarView(
               children: [

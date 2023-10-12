@@ -50,14 +50,12 @@ NavigationBarThemeData navigationBarThemeData(ColorScheme colorScheme) {
   );
 }
 
-NavigationDrawerThemeData navigationDrawerThemeData(
-    ColorScheme colorScheme, TextTheme textTheme) {
+NavigationDrawerThemeData navigationDrawerThemeData(ColorScheme colorScheme, TextTheme textTheme) {
   return NavigationDrawerThemeData(
     backgroundColor: colorScheme.surface,
     labelTextStyle: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge)
-            .copyWith(fontWeight: FontWeight.bold);
+        return GoogleFonts.outfit(textStyle: textTheme.bodyLarge).copyWith(fontWeight: FontWeight.bold);
       } else {
         return GoogleFonts.outfit(textStyle: textTheme.bodyLarge);
       }
@@ -125,8 +123,7 @@ extension ColorExtension on Color {
   Color darken([int percent = 40]) {
     assert(1 <= percent && percent <= 100);
     final value = 1 - percent / 100;
-    return Color.fromARGB(alpha, (red * value).round(), (green * value).round(),
-        (blue * value).round());
+    return Color.fromARGB(alpha, (red * value).round(), (green * value).round(), (blue * value).round());
   }
 }
 

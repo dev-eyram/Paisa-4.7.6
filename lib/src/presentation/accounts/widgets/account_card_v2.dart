@@ -7,7 +7,7 @@ import '../../../core/common.dart';
 import '../../../core/enum/card_type.dart';
 import '../../../data/accounts/model/account_model.dart';
 import '../../../domain/expense/entities/expense.dart';
-import '../../widgets/paisa_card.dart';
+import '../../widgets/sika_purse_card.dart';
 
 class AccountCardV2 extends StatelessWidget {
   const AccountCardV2({
@@ -21,26 +21,22 @@ class AccountCardV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme =
-        ColorScheme.fromSeed(seedColor: Color(account.color!));
+    final ColorScheme colorScheme = ColorScheme.fromSeed(seedColor: Color(account.color!));
     final color = colorScheme.primaryContainer;
     final onPrimary = colorScheme.onPrimaryContainer;
     final String expense = expenses.totalExpense.toFormateCurrency();
     final String income = expenses.totalIncome.toFormateCurrency();
-    final String totalBalance =
-        (account.initialAmount + expenses.fullTotal).toFormateCurrency();
+    final String totalBalance = (account.initialAmount + expenses.fullTotal).toFormateCurrency();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AspectRatio(
         aspectRatio: 16 / 9,
-        child: PaisaFilledCard(
+        child: SikaPurseFilledCard(
           color: color,
           child: InkWell(
             onTap: () => GoRouter.of(context).pushNamed(
               accountTransactionName,
-              pathParameters: <String, String>{
-                'aid': account.superId.toString()
-              },
+              pathParameters: <String, String>{'aid': account.superId.toString()},
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +44,7 @@ class AccountCardV2 extends StatelessWidget {
                 ListTile(
                   horizontalTitleGap: 0,
                   trailing: Icon(
-                    account.cardType == null
-                        ? CardType.bank.icon
-                        : account.cardType!.icon,
+                    account.cardType == null ? CardType.bank.icon : account.cardType!.icon,
                     color: onPrimary,
                   ),
                   title: Text(

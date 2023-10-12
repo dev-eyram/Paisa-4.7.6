@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-class PaisaPillChip extends StatelessWidget {
-  const PaisaPillChip({
+class SikaPursePillChip extends StatelessWidget {
+  const SikaPursePillChip({
     super.key,
     required this.title,
     required this.onPressed,

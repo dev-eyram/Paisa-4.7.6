@@ -68,9 +68,8 @@ class FileHandler {
     } else {
       final timeStamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
 
-      final paisaFileName = 'paisa_$timeStamp.json';
-      final fileTask =
-          await File('$dlPath/$paisaFileName').create(recursive: true);
+      final sikaPurseFileName = 'sika_purse_$timeStamp.json';
+      final fileTask = await File('$dlPath/$sikaPurseFileName').create(recursive: true);
       await fileTask.writeAsString(jsonString);
       return true;
     }
@@ -81,7 +80,7 @@ class FileHandler {
 
     return XFile.fromData(
       Uint8List.fromList(jsonString.codeUnits),
-      name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
+      name: 'sika_purse_backup_${DateTime.now().toIso8601String()}.json',
       mimeType: 'application/json',
       lastModified: DateTime.now(),
     );
@@ -91,7 +90,7 @@ class FileHandler {
     final String jsonString = await _fetchAllDataAndEncode();
     return XFile.fromData(
       Uint8List.fromList(jsonString.codeUnits),
-      name: 'paisa_backup_${DateTime.now().toIso8601String()}.json',
+      name: 'sika_purse_backup_${DateTime.now().toIso8601String()}.json',
       mimeType: 'application/json',
     );
   }
@@ -143,10 +142,8 @@ class FileHandler {
           expenses.length,
           (index) {
             final expense = expenses[index];
-            final account =
-                accountDataSource.fetchAccountFromId(expense.accountId);
-            final category =
-                categoryDataSource.fetchCategoryFromId(expense.categoryId);
+            final account = accountDataSource.fetchAccountFromId(expense.accountId);
+            final category = categoryDataSource.fetchCategoryFromId(expense.categoryId);
             if (account != null && category != null) {
               return expenseRow(
                 index,

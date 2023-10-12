@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/presentation/summary/controller/summary_controller.dart';
+import 'package:sika_purse/src/presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
 
 import 'filter_budget_widget.dart';
 
-class PaisaFilterTransactionWidget extends StatelessWidget {
-  const PaisaFilterTransactionWidget({super.key});
+class SikaPurseFilterTransactionWidget extends StatelessWidget {
+  const SikaPurseFilterTransactionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,7 @@ class PaisaFilterTransactionWidget extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width >= 700
-                ? 700
-                : double.infinity,
+            maxWidth: MediaQuery.of(context).size.width >= 700 ? 700 : double.infinity,
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

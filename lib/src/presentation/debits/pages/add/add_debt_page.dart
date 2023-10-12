@@ -9,10 +9,10 @@ import '../../../../../main.dart';
 import '../../../../core/common.dart';
 import '../../../../data/debt/models/transactions_model.dart';
 import '../../../../domain/debt/entities/transaction.dart';
-import '../../../widgets/paisa_annotate_region_widget.dart';
-import '../../../widgets/paisa_big_button_widget.dart';
-import '../../../widgets/paisa_bottom_sheet.dart';
-import '../../../widgets/paisa_text_field.dart';
+import '../../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../../widgets/sika_purse_big_button_widget.dart';
+import '../../../widgets/sika_purse_bottom_sheet.dart';
+import '../../../widgets/sika_purse_text_field.dart';
 import '../../cubit/debts_bloc.dart';
 import '../../widgets/debt_toggle_buttons_widget.dart';
 
@@ -53,7 +53,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: BlocProvider(
         create: (_) => debtBloc,
@@ -95,7 +95,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                   isDebtAddOrUpdate
                       ? const SizedBox.shrink()
                       : IconButton(
-                          onPressed: () => paisaAlertDialog(
+                          onPressed: () => sikaPurseAlertDialog(
                             context,
                             title: Text(context.loc.dialogDeleteTitle),
                             child: RichText(
@@ -106,12 +106,10 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                             ),
                             confirmationButton: TextButton(
                               style: TextButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
                               ),
                               onPressed: () {
-                                debtBloc.add(DeleteDebtEvent(
-                                    int.tryParse(widget.debtId!) ?? 0));
+                                debtBloc.add(DeleteDebtEvent(int.tryParse(widget.debtId!) ?? 0));
                               },
                               child: const Text('Delete'),
                             ),
@@ -147,20 +145,15 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                     ListTile(
                       title: Text(
                         context.loc.transactionHistory,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                     ValueListenableBuilder<Box<TransactionsModel>>(
-                      valueListenable:
-                          getIt.get<Box<TransactionsModel>>().listenable(),
+                      valueListenable: getIt.get<Box<TransactionsModel>>().listenable(),
                       builder: (context, value, child) {
                         final int? parentId = int.tryParse(widget.debtId ?? '');
                         if (parentId == null) return const SizedBox.shrink();
-                        final List<Transaction> transactions =
-                            value.getTransactionsFromId(parentId);
+                        final List<Transaction> transactions = value.getTransactionsFromId(parentId);
 
                         return ListView.builder(
                           shrinkWrap: true,
@@ -172,15 +165,13 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                               leading: IconButton(
                                 onPressed: () {
                                   debtBloc.add(
-                                    DeleteTransactionEvent(
-                                        transaction.superId!),
+                                    DeleteTransactionEvent(transaction.superId!),
                                   );
                                 },
                                 icon: const Icon(Icons.delete),
                               ),
                               title: Text(transaction.now.formattedDate),
-                              trailing:
-                                  Text(transaction.amount.toFormateCurrency()),
+                              trailing: Text(transaction.amount.toFormateCurrency()),
                             );
                           },
                         );
@@ -192,7 +183,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
               bottomNavigationBar: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: PaisaBigButton(
+                  child: SikaPurseBigButton(
                     onPressed: () {
                       final isValid = _formKey.currentState!.validate();
                       if (!isValid) {
@@ -200,9 +191,7 @@ class _AddOrEditDebtPageState extends State<AddOrEditDebtPage> {
                       }
                       debtBloc.add(AddOrUpdateEvent(isDebtAddOrUpdate));
                     },
-                    title: isDebtAddOrUpdate
-                        ? context.loc.add
-                        : context.loc.update,
+                    title: isDebtAddOrUpdate ? context.loc.add : context.loc.update,
                   ),
                 ),
               ),
@@ -322,7 +311,7 @@ class NameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
+    return SikaPurseTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
       hintText: context.loc.nameHint,
@@ -333,8 +322,7 @@ class NameWidget extends StatelessWidget {
           return context.loc.validName;
         }
       },
-      onChanged: (value) =>
-          BlocProvider.of<DebtsBloc>(context).currentName = value,
+      onChanged: (value) => BlocProvider.of<DebtsBloc>(context).currentName = value,
     );
   }
 }
@@ -349,7 +337,7 @@ class DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
+    return SikaPurseTextFormField(
       controller: controller,
       keyboardType: TextInputType.name,
       hintText: context.loc.description,
@@ -360,8 +348,7 @@ class DescriptionWidget extends StatelessWidget {
           return context.loc.validDescription;
         }
       },
-      onChanged: (value) =>
-          BlocProvider.of<DebtsBloc>(context).currentDescription = value,
+      onChanged: (value) => BlocProvider.of<DebtsBloc>(context).currentDescription = value,
     );
   }
 }
@@ -376,7 +363,7 @@ class AmountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaTextFormField(
+    return SikaPurseTextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
       hintText: context.loc.amount,

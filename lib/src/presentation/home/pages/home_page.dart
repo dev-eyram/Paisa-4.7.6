@@ -7,7 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../core/enum/box_types.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_floating_action_button_widget.dart';
 import 'home_desktop_page.dart';
@@ -54,11 +54,6 @@ class LandingPage extends StatelessWidget {
         selectedIcon: const Icon(MdiIcons.timetable),
       ),
       Destination(
-        label: context.loc.reports,
-        icon: const Icon(MdiIcons.fileDocument),
-        selectedIcon: const Icon(MdiIcons.fileDocument),
-      ),
-      Destination(
         label: context.loc.recurring,
         icon: const Icon(MdiIcons.cashSync),
         selectedIcon: const Icon(MdiIcons.cashSync),
@@ -70,7 +65,7 @@ class LandingPage extends StatelessWidget {
         instanceName: BoxType.settings.name,
       ),
     );
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       child: BlocProvider(
         create: (context) => homeBloc,
         child: WillPopScope(

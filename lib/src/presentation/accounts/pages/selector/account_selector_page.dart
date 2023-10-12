@@ -12,8 +12,8 @@ import '../../../../data/accounts/data_sources/default_account.dart';
 import '../../../../data/accounts/data_sources/local_account_data_manager.dart';
 import '../../../../data/accounts/model/account_model.dart';
 import '../../../settings/bloc/settings_controller.dart';
-import '../../../widgets/paisa_big_button_widget.dart';
-import '../../../widgets/paisa_card.dart';
+import '../../../widgets/sika_purse_big_button_widget.dart';
+import '../../../widgets/sika_purse_card.dart';
 
 class AccountSelectorPage extends StatefulWidget {
   const AccountSelectorPage({super.key});
@@ -33,7 +33,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
       appBar: context.materialYouAppBar(
         context.loc.accounts,
         actions: [
-          PaisaButton(
+          SikaPurseButton(
             onPressed: () async {
               context.go(currencySelectorPath);
               await settings.put(userAccountSelectorKey, false);
@@ -60,7 +60,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                 ),
               ),
               ScreenTypeLayout(
-                mobile: PaisaFilledCard(
+                mobile: SikaPurseFilledCard(
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: categoryModels.length,
@@ -131,8 +131,7 @@ class _AccountSelectorPageState extends State<AccountSelectorPage> {
                               ),
                             ),
                             showCheckmark: false,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             label: Text(model.bankName),
                             labelStyle: context.titleMedium,
                             padding: const EdgeInsets.all(12),
@@ -174,7 +173,7 @@ class AccountItemWidget extends StatelessWidget {
         title: Text(model.name),
         trailing: const Icon(MdiIcons.delete),
       ),
-      tablet: PaisaCard(
+      tablet: SikaPurseCard(
         child: InkWell(
           onTap: onPress,
           child: Padding(

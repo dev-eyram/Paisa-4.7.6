@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
 import '../model/expense_model.dart';
 import 'local_expense_data_manager.dart';
@@ -35,17 +35,13 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
 
   @override
   Future<void> deleteExpensesByAccountId(int accountId) {
-    final keys = expenseBox.values
-        .where((element) => element.accountId == accountId)
-        .map((e) => e.key);
+    final keys = expenseBox.values.where((element) => element.accountId == accountId).map((e) => e.key);
     return expenseBox.deleteAll(keys);
   }
 
   @override
   Future<void> deleteExpensesByCategoryId(int categoryId) {
-    final keys = expenseBox.values
-        .where((element) => element.categoryId == categoryId)
-        .map((e) => e.key);
+    final keys = expenseBox.values.where((element) => element.categoryId == categoryId).map((e) => e.key);
     return expenseBox.deleteAll(keys);
   }
 
@@ -61,15 +57,11 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
 
   @override
   List<ExpenseModel> fetchExpensesFromAccountId(int accountId) =>
-      expenseBox.values
-          .where((element) => element.accountId == accountId)
-          .toList();
+      expenseBox.values.where((element) => element.accountId == accountId).toList();
 
   @override
   List<ExpenseModel> fetchExpensesFromCategoryId(int category) =>
-      expenseBox.values
-          .where((element) => element.categoryId == category)
-          .toList();
+      expenseBox.values.where((element) => element.categoryId == category).toList();
 
   @override
   List<ExpenseModel> filterExpenses(
@@ -85,13 +77,11 @@ class LocalExpenseDataManagerImpl implements LocalExpenseDataManager {
   }
 
   @override
-  Future<List<ExpenseModel>> filteredExpenses(
-      DateTimeRange dateTimeRange) async {
+  Future<List<ExpenseModel>> filteredExpenses(DateTimeRange dateTimeRange) async {
     final List<ExpenseModel> expenses = expenseBox.values.toList();
     expenses.sort((a, b) => b.time.compareTo(a.time));
     final filteredExpenses = expenses.takeWhile((value) {
-      return value.time.isAfter(dateTimeRange.start) &&
-          value.time.isBefore(dateTimeRange.end);
+      return value.time.isAfter(dateTimeRange.start) && value.time.isBefore(dateTimeRange.end);
     }).toList();
     return filteredExpenses;
   }

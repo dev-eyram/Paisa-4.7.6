@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/category/entities/category.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
+import '../../widgets/sika_purse_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_mobile_widget.dart';
 
@@ -26,7 +26,7 @@ class CategoryListMobileWidget extends StatelessWidget {
       itemBuilder: (_, index) {
         return CategoryItemMobileWidget(
           category: categories[index],
-          onPressed: () => paisaAlertDialog(
+          onPressed: () => sikaPurseAlertDialog(
             context,
             title: Text(
               context.loc.dialogDeleteTitle,

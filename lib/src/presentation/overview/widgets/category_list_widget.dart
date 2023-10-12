@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:paisa/src/app/routes.dart';
+import 'package:sika_purse/src/app/routes.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/category/entities/category.dart';
@@ -41,8 +41,7 @@ class CategoryListWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Icon(
-                        color:
-                            Color(map.key.color ?? Colors.amber.shade100.value),
+                        color: Color(map.key.color ?? Colors.amber.shade100.value),
                         IconData(
                           map.key.icon,
                           fontFamily: fontFamilyName,
@@ -67,8 +66,7 @@ class CategoryListWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           child: LinearProgressIndicator(
                             value: map.value.total / totalExpense,
-                            color: Color(
-                                map.key.color ?? Colors.amber.shade100.value),
+                            color: Color(map.key.color ?? Colors.amber.shade100.value),
                           ),
                         ),
                       ),

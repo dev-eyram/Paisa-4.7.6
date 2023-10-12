@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
 import '../../../app/routes.dart';
-import '../../widgets/paisa_icon_title.dart';
-import '../../widgets/paisa_search_bar.dart';
-import '../../widgets/paisa_user_widget.dart';
+import '../../widgets/sika_purse_icon_title.dart';
+import '../../widgets/sika_purse_search_bar.dart';
+import '../../widgets/sika_purse_user_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/content_widget.dart';
 import 'home_page.dart';
@@ -30,11 +30,11 @@ class HomeDesktopPage extends StatelessWidget {
         toolbarHeight: 72,
         leading: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: PaisaIconTitle(),
+          child: SikaPurseIconTitle(),
         ),
         leadingWidth: 300,
-        title: const PaisaSearchBar(),
-        actions: const [PaisaUserWidget()],
+        title: const SikaPurseSearchBar(),
+        actions: const [SikaPurseUserWidget()],
       ),
       floatingActionButton: floatingActionButton,
       body: Row(

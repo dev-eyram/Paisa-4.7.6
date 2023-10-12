@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:paisa/src/presentation/overview/pages/overview_page.dart';
+import 'package:sika_purse/src/presentation/overview/pages/overview_page.dart';
 
 import '../../data/expense/model/expense_model.dart';
 import '../../domain/expense/entities/expense.dart';
@@ -11,9 +11,7 @@ import '../enum/transaction_type.dart';
 
 extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   List<Expense> get toEntities {
-    return values
-        .map((expenseModel) => expenseModel.toEntity())
-        .sorted((a, b) => b.time.compareTo(a.time));
+    return values.map((expenseModel) => expenseModel.toEntity()).sorted((a, b) => b.time.compareTo(a.time));
   }
 
   List<Expense> search(
@@ -23,23 +21,19 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
   }) {
     Iterable<ExpenseModel> expenseModels = values;
     if (selectedAccountId != -1) {
-      expenseModels =
-          values.where((element) => element.accountId == selectedAccountId);
+      expenseModels = values.where((element) => element.accountId == selectedAccountId);
     }
     if (selectedCategoryId != -1) {
-      expenseModels =
-          values.where((element) => element.categoryId == selectedCategoryId);
+      expenseModels = values.where((element) => element.categoryId == selectedCategoryId);
     }
 
     return expenseModels.where((ExpenseModel element) {
       final description = element.description ?? '';
-      return element.name.toLowerCase().contains(query) ||
-          description.toLowerCase().contains(query);
+      return element.name.toLowerCase().contains(query) || description.toLowerCase().contains(query);
     }).toEntities();
   }
 
-  List<ExpenseModel> get expenses =>
-      values.sorted(((a, b) => b.time.compareTo(a.time)));
+  List<ExpenseModel> get expenses => values.sorted(((a, b) => b.time.compareTo(a.time)));
 
   List<ExpenseModel> expensesFromAccountId(int accountId) =>
       expenses.where((element) => element.accountId == accountId).toList();
@@ -48,28 +42,21 @@ extension ExpenseModelBoxMapping on Box<ExpenseModel> {
       .sorted((a, b) => b.time.compareTo(a.time))
       .where((element) => element.categoryId != -1 && element.accountId != -1)
       .where((element) =>
-          element.type ==
-          (overviewType == OverviewType.income
-              ? TransactionType.expense
-              : TransactionType.income))
+          element.type == (overviewType == OverviewType.income ? TransactionType.expense : TransactionType.income))
       .toList();
 
   List<ExpenseModel> isFilterTimeBetween(DateTimeRange range) =>
       values.where((element) => element.time.isAfterBeforeTime(range)).toList();
 
-  Iterable<ExpenseModel> get expenseList =>
-      values.where((element) => element.type == TransactionType.expense);
+  Iterable<ExpenseModel> get expenseList => values.where((element) => element.type == TransactionType.expense);
 
-  Iterable<ExpenseModel> get incomeList =>
-      values.where((element) => element.type == TransactionType.income);
+  Iterable<ExpenseModel> get incomeList => values.where((element) => element.type == TransactionType.income);
 
-  double get totalExpense => expenseList
-      .map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
+  double get totalExpense =>
+      expenseList.map((e) => e.currency).fold<double>(0, (previousValue, element) => previousValue + element);
 
-  double get totalIncome => incomeList
-      .map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
+  double get totalIncome =>
+      incomeList.map((e) => e.currency).fold<double>(0, (previousValue, element) => previousValue + element);
 }
 
 extension ExpenseModelHelper on ExpenseModel {
@@ -94,30 +81,22 @@ extension ExpenseModelsHelper on Iterable<ExpenseModel> {
   }
 
   List<Expense> toEntities() {
-    return map((expenseModel) => expenseModel.toEntity())
-        .sorted((a, b) => b.time.compareTo(a.time));
+    return map((expenseModel) => expenseModel.toEntity()).sorted((a, b) => b.time.compareTo(a.time));
   }
 
-  List<ExpenseModel> budgetOverView(OverviewType overviewType) =>
-      sorted((a, b) => b.time.compareTo(a.time))
-          .where(
-              (element) => element.categoryId != -1 && element.accountId != -1)
-          .where((element) =>
-              element.type ==
-              (overviewType == OverviewType.income
-                  ? TransactionType.income
-                  : TransactionType.expense))
-          .toList();
+  List<ExpenseModel> budgetOverView(OverviewType overviewType) => sorted((a, b) => b.time.compareTo(a.time))
+      .where((element) => element.categoryId != -1 && element.accountId != -1)
+      .where((element) =>
+          element.type == (overviewType == OverviewType.income ? TransactionType.income : TransactionType.expense))
+      .toList();
 }
 
 extension ExpensesHelper on Iterable<Expense> {
   List<Expense> get expenses => sorted(((a, b) => b.time.compareTo(a.time)));
 
-  List<Expense> get expenseList =>
-      where((element) => element.type == TransactionType.expense).toList();
+  List<Expense> get expenseList => where((element) => element.type == TransactionType.expense).toList();
 
-  List<Expense> get incomeList =>
-      where((element) => element.type == TransactionType.income).toList();
+  List<Expense> get incomeList => where((element) => element.type == TransactionType.income).toList();
 
   String get balance => (totalIncome - totalExpense).toFormateCurrency();
 
@@ -135,65 +114,42 @@ extension ExpensesHelper on Iterable<Expense> {
       });
   double get fullTotal => totalIncome - totalExpense;
 
-  double get totalExpense => expenseList
+  double get totalExpense =>
+      expenseList.map((e) => e.currency).fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get totalIncome =>
+      incomeList.map((e) => e.currency).fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get total => map((e) => e.currency).fold<double>(0, (previousValue, element) => previousValue + element);
+
+  double get thisMonthExpense => where((element) => element.type == TransactionType.expense)
+      .where((element) => element.time.month == DateTime.now().month && element.time.year == DateTime.now().year)
       .map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  double get totalIncome => incomeList
+  List<Expense> get thisMonthExpensesList => where((element) => element.type == TransactionType.expense)
+      .where((element) => element.time.month == DateTime.now().month && element.time.year == DateTime.now().year)
+      .toList();
+  List<double> get expenseDoubleList => thisMonthExpensesList.map((element) => element.currency).toList();
+
+  List<Expense> get thisMonthIncomeList => where((element) => element.type == TransactionType.income)
+      .where((element) => element.time.month == DateTime.now().month && element.time.year == DateTime.now().year)
+      .toList();
+
+  List<double> get incomeDoubleList => thisMonthIncomeList.map((element) => element.currency).toList();
+
+  double get thisMonthIncome => where((element) => element.type == TransactionType.income)
+      .where((element) => element.time.month == DateTime.now().month && element.time.year == DateTime.now().year)
       .map((e) => e.currency)
       .fold<double>(0, (previousValue, element) => previousValue + element);
 
-  double get total => map((e) => e.currency)
-      .fold<double>(0, (previousValue, element) => previousValue + element);
-
-  double get thisMonthExpense =>
-      where((element) => element.type == TransactionType.expense)
-          .where((element) =>
-              element.time.month == DateTime.now().month &&
-              element.time.year == DateTime.now().year)
-          .map((e) => e.currency)
-          .fold<double>(0, (previousValue, element) => previousValue + element);
-
-  List<Expense> get thisMonthExpensesList =>
-      where((element) => element.type == TransactionType.expense)
-          .where((element) =>
-              element.time.month == DateTime.now().month &&
-              element.time.year == DateTime.now().year)
-          .toList();
-  List<double> get expenseDoubleList =>
-      thisMonthExpensesList.map((element) => element.currency).toList();
-
-  List<Expense> get thisMonthIncomeList =>
-      where((element) => element.type == TransactionType.income)
-          .where((element) =>
-              element.time.month == DateTime.now().month &&
-              element.time.year == DateTime.now().year)
-          .toList();
-
-  List<double> get incomeDoubleList =>
-      thisMonthIncomeList.map((element) => element.currency).toList();
-
-  double get thisMonthIncome =>
-      where((element) => element.type == TransactionType.income)
-          .where((element) =>
-              element.time.month == DateTime.now().month &&
-              element.time.year == DateTime.now().year)
-          .map((e) => e.currency)
-          .fold<double>(0, (previousValue, element) => previousValue + element);
-
-  List<MapEntry<String, List<Expense>>> groupByTime(
-          FilterExpense filterBudget) =>
-      groupBy(this,
-              (ExpenseModel element) => element.time.formatted(filterBudget))
-          .entries
-          .toList();
+  List<MapEntry<String, List<Expense>>> groupByTime(FilterExpense filterBudget) =>
+      groupBy(this, (ExpenseModel element) => element.time.formatted(filterBudget)).entries.toList();
 
   Map<String, List<Expense>> groupByTimeList(FilterExpense filterBudget) =>
-      groupBy(
-          this, (ExpenseModel element) => element.time.formatted(filterBudget));
+      groupBy(this, (ExpenseModel element) => element.time.formatted(filterBudget));
 
-  List<Expense> toEntities() =>
-      map((expenseModel) => expenseModel.toEntity()).toList();
+  List<Expense> toEntities() => map((expenseModel) => expenseModel.toEntity()).toList();
 }
 
 extension ExpenseHelper on Expense {}

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../core/common.dart';
-import '../../widgets/paisa_date_picker.dart';
-import '../../widgets/paisa_time_picker.dart';
+import '../../widgets/sika_purse_date_picker.dart';
+import '../../widgets/sika_purse_time_picker.dart';
 import '../bloc/expense_bloc.dart';
 
 class ExpenseDatePickerWidget extends StatefulWidget {
@@ -13,13 +13,11 @@ class ExpenseDatePickerWidget extends StatefulWidget {
   });
 
   @override
-  State<ExpenseDatePickerWidget> createState() =>
-      _ExpenseDatePickerWidgetState();
+  State<ExpenseDatePickerWidget> createState() => _ExpenseDatePickerWidgetState();
 }
 
 class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
-  late DateTime selectedDateTime =
-      BlocProvider.of<ExpenseBloc>(context).selectedDate;
+  late DateTime selectedDateTime = BlocProvider.of<ExpenseBloc>(context).selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 onTap: () async {
-                  final DateTime? dateTime = await paisaDatePicker(
+                  final DateTime? dateTime = await sikaPurseDatePicker(
                     context,
                     selectedDateTime: selectedDateTime,
                   );
@@ -44,8 +42,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                         month: dateTime.month,
                         year: dateTime.year,
                       );
-                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
-                          selectedDateTime;
+                      BlocProvider.of<ExpenseBloc>(context).selectedDate = selectedDateTime;
                     });
                   }
                 },
@@ -62,15 +59,14 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 onTap: () async {
-                  final TimeOfDay? timeOfDay = await paisaTimerPicker(context);
+                  final TimeOfDay? timeOfDay = await sikaPurseTimerPicker(context);
                   if (timeOfDay != null) {
                     setState(() {
                       selectedDateTime = selectedDateTime.copyWith(
                         hour: timeOfDay.hour,
                         minute: timeOfDay.minute,
                       );
-                      BlocProvider.of<ExpenseBloc>(context).selectedDate =
-                          selectedDateTime;
+                      BlocProvider.of<ExpenseBloc>(context).selectedDate = selectedDateTime;
                     });
                   }
                 },

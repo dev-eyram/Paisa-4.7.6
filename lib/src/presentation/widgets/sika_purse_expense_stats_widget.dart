@@ -1,13 +1,13 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'paisa_card.dart';
+import 'sika_purse_card.dart';
 
-class PaisaExpenseStatsWidget extends StatelessWidget {
-  const PaisaExpenseStatsWidget({
+class SikaPurseExpenseStatsWidget extends StatelessWidget {
+  const SikaPurseExpenseStatsWidget({
     super.key,
     required this.total,
     required this.title,
@@ -25,7 +25,7 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
-      mobile: PaisaFilledCard(
+      mobile: SikaPurseFilledCard(
         child: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Column(
@@ -49,24 +49,15 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
                           Text(
                             title,
                             style: GoogleFonts.outfit(
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant
-                                        .withOpacity(0.75),
+                              textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.75),
                                   ),
                             ),
                           ),
                           Text(
                             total,
                             style: GoogleFonts.manrope(
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(fontWeight: FontWeight.bold),
+                              textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -92,27 +83,21 @@ class PaisaExpenseStatsWidget extends StatelessWidget {
           ),
         ),
       ),
-      tablet: PaisaFilledCard(
+      tablet: SikaPurseFilledCard(
         color: context.surfaceVariant.withOpacity(0.4),
         child: ListTile(
           title: Text(
             title,
             style: GoogleFonts.manrope(
               textStyle: context.bodySmall?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurfaceVariant
-                    .withOpacity(0.75),
+                color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.75),
               ),
             ),
           ),
           subtitle: Text(
             total,
             style: GoogleFonts.manrope(
-              textStyle: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
           leading: Align(

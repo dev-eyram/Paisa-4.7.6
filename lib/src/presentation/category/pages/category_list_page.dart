@@ -6,8 +6,8 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../domain/category/entities/category.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import '../bloc/category_bloc.dart';
 import 'category_list_mobile_page.dart';
 import 'category_list_tablet_page.dart';
@@ -18,7 +18,7 @@ class CategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = getIt.get<CategoryBloc>();
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
         body: ValueListenableBuilder<Box<CategoryModel>>(

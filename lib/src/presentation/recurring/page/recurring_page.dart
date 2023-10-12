@@ -7,15 +7,15 @@ import '../../../../main.dart';
 import '../../../app/routes.dart';
 import '../../../core/common.dart';
 import '../../../data/recurring/model/recurring.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 
 class RecurringPage extends StatelessWidget {
   const RecurringPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
         body: ValueListenableBuilder<Box<RecurringModel>>(
@@ -57,8 +57,7 @@ class RecurringListWidget extends StatelessWidget {
         final RecurringModel expense = recurringModels[index];
         return ListTile(
           title: Text(expense.name),
-          subtitle: Text(
-              '${expense.recurringType.name(context)} - ${expense.recurringDate.shortDayString}'),
+          subtitle: Text('${expense.recurringType.name(context)} - ${expense.recurringDate.shortDayString}'),
           trailing: IconButton(
             onPressed: () async {
               await expense.delete();

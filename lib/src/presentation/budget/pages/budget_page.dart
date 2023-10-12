@@ -8,8 +8,8 @@ import '../../../../main.dart';
 import '../../../core/common.dart';
 import '../../../data/category/model/category_model.dart';
 import '../../../domain/category/entities/category.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 
 class BudgetPage extends StatelessWidget {
   const BudgetPage({
@@ -21,7 +21,7 @@ class BudgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaisaAnnotatedRegionWidget(
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: ValueListenableBuilder<Box<CategoryModel>>(
         valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
@@ -39,13 +39,11 @@ class BudgetPage extends StatelessWidget {
             itemCount: categories.length,
             itemBuilder: (context, index) {
               final Category category = categories[index];
-              final List<Expense> expenses = summaryController
-                  .fetchExpensesFromCategoryId(category.superId!)
-                  .thisMonthExpensesList;
+              final List<Expense> expenses =
+                  summaryController.fetchExpensesFromCategoryId(category.superId!).thisMonthExpensesList;
               return BudgetItem(category: category, expenses: expenses);
             },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
           );
         },
       ),
@@ -66,8 +64,7 @@ class BudgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double totalExpenses = expenses.totalExpense;
-    final double totalBudget =
-        (category.finalBudget == 0.0 ? 1 : category.finalBudget);
+    final double totalBudget = (category.finalBudget == 0.0 ? 1 : category.finalBudget);
     double difference = category.finalBudget - totalExpenses;
 
     return ListTile(
@@ -130,8 +127,7 @@ class BudgetItem extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text:
-                            ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency()}',
+                        text: ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency()}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],

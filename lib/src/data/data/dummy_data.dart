@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:paisa/main.dart';
-import 'package:paisa/src/core/enum/card_type.dart';
-import 'package:paisa/src/core/enum/transaction_type.dart';
-import 'package:paisa/src/domain/account/repository/account_repository.dart';
-import 'package:paisa/src/domain/category/repository/category_repository.dart';
-import 'package:paisa/src/domain/expense/repository/expense_repository.dart';
+import 'package:sika_purse/main.dart';
+import 'package:sika_purse/src/core/enum/card_type.dart';
+import 'package:sika_purse/src/core/enum/transaction_type.dart';
+import 'package:sika_purse/src/domain/account/repository/account_repository.dart';
+import 'package:sika_purse/src/domain/category/repository/category_repository.dart';
+import 'package:sika_purse/src/domain/expense/repository/expense_repository.dart';
 
 // Generate dummy data
 Future<void> addDummyData() async {

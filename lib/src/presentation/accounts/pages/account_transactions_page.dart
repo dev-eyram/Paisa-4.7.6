@@ -8,10 +8,10 @@ import '../../../domain/category/entities/category.dart';
 import '../../../domain/expense/entities/expense.dart';
 import '../../summary/controller/summary_controller.dart';
 import '../../summary/widgets/expense_item_widget.dart';
-import '../../widgets/paisa_annotate_region_widget.dart';
-import '../../widgets/paisa_big_button_widget.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
-import '../../widgets/paisa_empty_widget.dart';
+import '../../widgets/sika_purse_annotate_region_widget.dart';
+import '../../widgets/sika_purse_big_button_widget.dart';
+import '../../widgets/sika_purse_bottom_sheet.dart';
+import '../../widgets/sika_purse_empty_widget.dart';
 import '../bloc/accounts_bloc.dart';
 
 class AccountTransactionsPage extends StatelessWidget {
@@ -27,9 +27,8 @@ class AccountTransactionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
-    BlocProvider.of<AccountsBloc>(context)
-        .add(FetchAccountAndExpenseFromIdEvent(accountId));
-    return PaisaAnnotatedRegionWidget(
+    BlocProvider.of<AccountsBloc>(context).add(FetchAccountAndExpenseFromIdEvent(accountId));
+    return SikaPurseAnnotatedRegionWidget(
       color: context.background,
       child: Scaffold(
         appBar: context.materialYouAppBar(
@@ -48,7 +47,7 @@ class AccountTransactionsPage extends StatelessWidget {
             IconButton(
               tooltip: context.loc.delete,
               onPressed: () {
-                paisaAlertDialog(
+                sikaPurseAlertDialog(
                   context,
                   title: Text(
                     context.loc.dialogDeleteTitle,
@@ -80,8 +79,7 @@ class AccountTransactionsPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                     onPressed: () {
-                      BlocProvider.of<AccountsBloc>(context)
-                          .add(DeleteAccountEvent(int.parse(accountId)));
+                      BlocProvider.of<AccountsBloc>(context).add(DeleteAccountEvent(int.parse(accountId)));
                       Navigator.pop(context);
                     },
                     child: Text(
@@ -117,8 +115,7 @@ class AccountTransactionsPage extends StatelessWidget {
                     itemCount: state.expenses.length,
                     itemBuilder: (context, index) {
                       final Expense expense = state.expenses[index];
-                      final Category? category = summaryController
-                          .fetchCategoryFromId(expense.categoryId);
+                      final Category? category = summaryController.fetchCategoryFromId(expense.categoryId);
                       if (category == null) {
                         return const SizedBox.shrink();
                       } else {
@@ -143,7 +140,7 @@ class AccountTransactionsPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                PaisaIconButton(
+                SikaPurseIconButton(
                   onPressed: () {
                     GoRouter.of(context).pushNamed(
                       addTransactionsName,
@@ -156,7 +153,7 @@ class AccountTransactionsPage extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                PaisaIconButton(
+                SikaPurseIconButton(
                   onPressed: () {
                     GoRouter.of(context).pushNamed(
                       addTransactionsName,

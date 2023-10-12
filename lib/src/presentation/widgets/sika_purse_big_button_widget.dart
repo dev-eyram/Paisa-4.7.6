@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:paisa/src/core/common.dart';
+import 'package:sika_purse/src/core/common.dart';
 
-class PaisaBigButton extends StatelessWidget {
-  const PaisaBigButton({
+class SikaPurseBigButton extends StatelessWidget {
+  const SikaPurseBigButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -35,8 +35,8 @@ class PaisaBigButton extends StatelessWidget {
   }
 }
 
-class PaisaButton extends StatelessWidget {
-  const PaisaButton({
+class SikaPurseButton extends StatelessWidget {
+  const SikaPurseButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -59,8 +59,8 @@ class PaisaButton extends StatelessWidget {
   }
 }
 
-class PaisaIconButton extends StatelessWidget {
-  const PaisaIconButton({
+class SikaPurseIconButton extends StatelessWidget {
+  const SikaPurseIconButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -86,8 +86,8 @@ class PaisaIconButton extends StatelessWidget {
   }
 }
 
-class PaisaTextButton extends StatelessWidget {
-  const PaisaTextButton({
+class SikaPurseTextButton extends StatelessWidget {
+  const SikaPurseTextButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -109,8 +109,8 @@ class PaisaTextButton extends StatelessWidget {
   }
 }
 
-class PaisaOutlineButton extends StatelessWidget {
-  const PaisaOutlineButton({
+class SikaPurseOutlineButton extends StatelessWidget {
+  const SikaPurseOutlineButton({
     super.key,
     required this.onPressed,
     required this.title,
@@ -132,8 +132,8 @@ class PaisaOutlineButton extends StatelessWidget {
   }
 }
 
-class PaisaOutlineIconButton extends StatelessWidget {
-  const PaisaOutlineIconButton({
+class SikaPurseOutlineIconButton extends StatelessWidget {
+  const SikaPurseOutlineIconButton({
     super.key,
     required this.onPressed,
     required this.title,

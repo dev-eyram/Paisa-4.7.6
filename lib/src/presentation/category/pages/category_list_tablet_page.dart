@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/common.dart';
 import '../../../domain/category/entities/category.dart';
-import '../../widgets/paisa_bottom_sheet.dart';
+import '../../widgets/sika_purse_bottom_sheet.dart';
 import '../bloc/category_bloc.dart';
 import '../widgets/category_item_tablet_widget.dart';
 
@@ -28,8 +28,7 @@ class CategoryListTabletWidget extends StatelessWidget {
         top: 8,
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount:
-            MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
+        crossAxisCount: MediaQuery.of(context).orientation == Orientation.landscape ? 3 : 2,
         childAspectRatio: 16 / 3.5,
       ),
       itemCount: categories.length,
@@ -37,7 +36,7 @@ class CategoryListTabletWidget extends StatelessWidget {
       itemBuilder: (_, index) {
         return CategoryItemTabletWidget(
           category: categories[index],
-          onPressed: () => paisaAlertDialog(
+          onPressed: () => sikaPurseAlertDialog(
             context,
             title: Text(context.loc.dialogDeleteTitle),
             child: RichText(
