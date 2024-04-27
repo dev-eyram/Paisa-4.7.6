@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:sika_purse/src/presentation/budget/pages/add/add_budget_page.dart';
 
 import '../core/common.dart';
 import '../core/enum/box_types.dart';
@@ -58,6 +59,9 @@ const editTransactionsPath = 'edit-transaction/:eid';
 
 const addCategoryPath = 'add-category';
 const addCategoryName = 'add-category';
+
+const addBudgetPath = 'add-budget';
+const addBudgetName = 'add-budget';
 
 const manageCategoriesPath = 'categories';
 const manageCategoriesName = 'categories';
@@ -139,13 +143,15 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: loginName,
       path: loginPath,
-      builder: (context, state) => const Center(child: CircularProgressIndicator()),
+      builder: (context, state) =>
+          const Center(child: CircularProgressIndicator()),
     ),
     GoRoute(
       name: currencySelectorName,
       path: currencySelectorPath,
       builder: (context, state) {
-        final forceCurrencySelector = state.queryParameters['force_currency_selector'];
+        final forceCurrencySelector =
+            state.queryParameters['force_currency_selector'];
         return CurrencySelectorPage(
           forceCurrencySelector: forceCurrencySelector == 'true',
         );
@@ -179,7 +185,8 @@ final GoRouter goRouter = GoRouter(
             final String? accountId = state.queryParameters['aid'];
             final String? categoryId = state.queryParameters['cid'];
             final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
-            final TransactionType transactionType = TransactionType.values[typeInt];
+            final TransactionType transactionType =
+                TransactionType.values[typeInt];
             return MaterialPage(
               key: ValueKey(state.location),
               child: ExpensePage(
@@ -213,6 +220,18 @@ final GoRouter goRouter = GoRouter(
                 builder: (context, state) => const CategoryIconPickerPage(),
               )
             ]),
+        GoRoute(
+          name: addBudgetName,
+          path: addBudgetPath,
+          builder: (context, state) => const AddBudgetPage(),
+          // routes: [
+          //   GoRoute(
+          //     path: iconPickerPath,
+          //     name: iconPickerName,
+          //     builder: (context, state) => const CategoryIconPickerPage(),
+          //   )
+          // ]
+        ),
         GoRoute(
           name: editCategoryName,
           path: editCategoryPath,
@@ -262,10 +281,13 @@ final GoRouter goRouter = GoRouter(
               path: addAccountWithIdPath,
               name: addAccountWithIdName,
               pageBuilder: (context, state) {
-                final String? transactionTypeString = state.queryParameters['type'];
+                final String? transactionTypeString =
+                    state.queryParameters['type'];
                 final String? accountId = state.queryParameters['aid'];
-                final int typeInt = int.tryParse(transactionTypeString ?? '') ?? 0;
-                final TransactionType transactionType = TransactionType.values[typeInt];
+                final int typeInt =
+                    int.tryParse(transactionTypeString ?? '') ?? 0;
+                final TransactionType transactionType =
+                    TransactionType.values[typeInt];
                 return MaterialPage(
                   key: ValueKey(state.location),
                   child: ExpensePage(
@@ -369,7 +391,10 @@ final GoRouter goRouter = GoRouter(
     }
 
     final isBiometricEnabled = settings.get(userAuthKey, defaultValue: false);
-    if (isBiometricEnabled && name.isNotEmpty && image.isNotEmpty && isLogging) {
+    if (isBiometricEnabled &&
+        name.isNotEmpty &&
+        image.isNotEmpty &&
+        isLogging) {
       return biometricPath;
     } else if (name.isNotEmpty && image.isNotEmpty && isLogging) {
       return landingPath;

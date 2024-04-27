@@ -19,6 +19,15 @@ class ExpenseAdded extends ExpenseState {
   List<Object> get props => [isAddOrUpdate];
 }
 
+class ExpenseExceeded extends ExpenseState {
+  const ExpenseExceeded({this.isExceeded = true});
+
+  final bool isExceeded;
+
+  @override
+  List<Object> get props => [isExceeded];
+}
+
 class ExpenseDeletedState extends ExpenseState {}
 
 class ChangeTransactionTypeState extends ExpenseState {

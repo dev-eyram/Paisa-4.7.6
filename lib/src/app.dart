@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:sika_purse/src/data/budget/store_cats.dart';
+import 'package:sika_purse/src/data/geo_fencing/geo_fencing.dart';
 import 'package:sika_purse/src/presentation/overview/cubit/budget_cubit.dart';
 import 'package:sika_purse/src/presentation/summary/controller/summary_controller.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +27,8 @@ class SikaPurseApp extends StatefulWidget {
 }
 
 class _SikaPurseAppState extends State<SikaPurseApp> {
-  final settings = getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
+  final settings =
+      getIt.get<Box<dynamic>>(instanceName: BoxType.settings.name).listenable(
     keys: [
       appColorKey,
       dynamicThemeKey,
@@ -37,6 +40,13 @@ class _SikaPurseAppState extends State<SikaPurseApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        ChangeNotifierProvider<GeoFencing>(
+          create: (context) => GeoFencing(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider<BudgetCategories>(
+          create: (context) => BudgetCategories(),
+        ),
         BlocProvider(
           create: (context) => getIt.get<AccountsBloc>(),
         ),
@@ -103,7 +113,8 @@ class _SikaPurseAppState extends State<SikaPurseApp> {
                   timePickerTheme: timePickerTheme,
                   appBarTheme: appBarThemeLight(lightColorScheme),
                   useMaterial3: true,
-                  textTheme: GoogleFonts.outfitTextTheme(ThemeData.light().textTheme),
+                  textTheme:
+                      GoogleFonts.outfitTextTheme(ThemeData.light().textTheme),
                   scaffoldBackgroundColor: lightColorScheme.background,
                   dialogBackgroundColor: lightColorScheme.background,
                   navigationBarTheme: navigationBarThemeData(lightColorScheme),

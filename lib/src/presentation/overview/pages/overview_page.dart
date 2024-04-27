@@ -1,4 +1,4 @@
-import 'package:bezier_chart_plus/bezier_chart_plus.dart';
+// import 'package:bezier_chart_plus/bezier_chart_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -116,59 +116,61 @@ class BarChartSample2 extends StatefulWidget {
 }
 
 class BarChartSample2State extends State<BarChartSample2> {
-  final List<DataPoint> expensePoints = [];
-  final List<DataPoint> incomePoints = [];
-  late DateTime selectedDate = toDate;
-  final DateTime toDate = DateTime.now();
+  // final List<DataPoint> expensePoints = [];
+  // final List<DataPoint> incomePoints = [];
+  // late DateTime selectedDate = toDate;
+  // final DateTime toDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    expensePoints.addAll(widget.expenses.expenseList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
-    incomePoints.addAll(widget.expenses.incomeList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
+    // expensePoints.addAll(widget.expenses.expenseList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
+    // incomePoints.addAll(widget.expenses.incomeList.map((e) => DataPoint<DateTime>(value: e.currency, xAxis: e.time)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SikaPurseFilledCard(
-        child: BezierChart(
-          bezierChartScale: BezierChartScale.monthly,
-          fromDate: widget.expenses.last.time,
-          toDate: toDate,
-          selectedDate: selectedDate,
-          onValueSelected: (value) {
-            debugPrint(value.toString());
-          },
-          onScaleChanged: (value) {},
-          onDateTimeSelected: (value) {},
-          series: [
-            BezierLine(
-              label: context.loc.expense,
-              data: expensePoints,
-              lineColor: Colors.red.shade300,
-            ),
-            BezierLine(
-              label: context.loc.income,
-              data: incomePoints,
-              lineColor: Colors.green.shade300,
-            ),
-          ],
-          config: BezierChartConfig(
-            bubbleIndicatorColor: context.surface,
-            bubbleIndicatorValueStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.primary),
-            bubbleIndicatorTitleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: context.onSurface),
-            bubbleIndicatorLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.onSurface),
-            verticalIndicatorStrokeWidth: 2.0,
-            showVerticalIndicator: true,
-            contentWidth: MediaQuery.of(context).size.width * 2,
-            footerHeight: 50.0,
-            xLinesColor: context.primary,
-            verticalIndicatorColor: context.primary,
-          ),
-        ),
-      ),
-    );
+    return Placeholder();
+
+    // Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: SikaPurseFilledCard(
+    //     child: BezierChart(
+    //       bezierChartScale: BezierChartScale.monthly,
+    //       fromDate: widget.expenses.last.time,
+    //       toDate: toDate,
+    //       selectedDate: selectedDate,
+    //       onValueSelected: (value) {
+    //         debugPrint(value.toString());
+    //       },
+    //       onScaleChanged: (value) {},
+    //       onDateTimeSelected: (value) {},
+    //       series: [
+    //         BezierLine(
+    //           label: context.loc.expense,
+    //           data: expensePoints,
+    //           lineColor: Colors.red.shade300,
+    //         ),
+    //         BezierLine(
+    //           label: context.loc.income,
+    //           data: incomePoints,
+    //           lineColor: Colors.green.shade300,
+    //         ),
+    //       ],
+    //       config: BezierChartConfig(
+    //         bubbleIndicatorColor: context.surface,
+    //         bubbleIndicatorValueStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.primary),
+    //         bubbleIndicatorTitleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: context.onSurface),
+    //         bubbleIndicatorLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: context.onSurface),
+    //         verticalIndicatorStrokeWidth: 2.0,
+    //         showVerticalIndicator: true,
+    //         contentWidth: MediaQuery.of(context).size.width * 2,
+    //         footerHeight: 50.0,
+    //         xLinesColor: context.primary,
+    //         verticalIndicatorColor: context.primary,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }

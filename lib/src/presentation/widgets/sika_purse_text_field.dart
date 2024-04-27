@@ -15,6 +15,7 @@ class SikaPurseTextFormField extends StatelessWidget {
     this.label,
     this.inputFormatters,
     this.counterText,
+    this.readOnly,
   });
 
   final String? Function(String?)? validator;
@@ -22,6 +23,7 @@ class SikaPurseTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? counterText;
   final bool? enabled;
+  final bool? readOnly;
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType keyboardType;
@@ -32,6 +34,7 @@ class SikaPurseTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly ?? false,
       maxLength: maxLength,
       maxLines: maxLines,
       enabled: enabled,

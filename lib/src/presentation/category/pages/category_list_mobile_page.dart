@@ -36,10 +36,11 @@ class CategoryListMobileWidget extends StatelessWidget {
                 text: context.loc.deleteCategory,
                 children: [
                   TextSpan(
-                      text: categories[index].name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      )),
+                    text: categories[index].name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
                 style: context.bodyLarge,
               ),

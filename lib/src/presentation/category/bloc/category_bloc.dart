@@ -94,7 +94,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         color: color,
       );
     } else {
-      if (currentCategory == null) return;
+      if (currentCategory == null) {
+        print("No category selected");
+        return;
+      }
 
       currentCategory!
         ..budget = budget ?? 0

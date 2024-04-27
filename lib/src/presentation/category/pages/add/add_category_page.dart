@@ -43,7 +43,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CategoryBloc>(context).add(FetchCategoryFromIdEvent(widget.categoryId));
+    BlocProvider.of<CategoryBloc>(context)
+        .add(FetchCategoryFromIdEvent(widget.categoryId));
   }
 
   @override
@@ -52,7 +53,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
       listener: (context, state) {
         if (state is CategoryAddedState) {
           context.showMaterialSnackBar(
-            isAddCategory ? context.loc.successAddCategory : context.loc.updatedCategory,
+            isAddCategory
+                ? context.loc.successAddCategory
+                : context.loc.updatedCategory,
             backgroundColor: context.primaryContainer,
             color: context.onPrimaryContainer,
           );
@@ -84,7 +87,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         return ScreenTypeLayout(
           mobile: Scaffold(
             appBar: context.materialYouAppBar(
-              isAddCategory ? context.loc.addCategory : context.loc.updateCategory,
+              isAddCategory
+                  ? context.loc.addCategory
+                  : context.loc.updateCategory,
             ),
             body: SingleChildScrollView(
               child: Form(
@@ -95,12 +100,17 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                     const CategoryIconPickerWidget(),
                     SetBudgetWidget(controller: budgetController),
                     ListTile(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
                       onTap: () {
                         sikaPurseColorPicker(context,
-                                defaultColor: BlocProvider.of<CategoryBloc>(context).selectedColor ?? Colors.red.value)
+                                defaultColor:
+                                    BlocProvider.of<CategoryBloc>(context)
+                                            .selectedColor ??
+                                        Colors.red.value)
                             .then((color) {
-                          BlocProvider.of<CategoryBloc>(context).add(CategoryColorSelectedEvent(color));
+                          BlocProvider.of<CategoryBloc>(context)
+                              .add(CategoryColorSelectedEvent(color));
                         });
                       },
                       leading: Icon(
@@ -114,7 +124,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         height: 32,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(BlocProvider.of<CategoryBloc>(context).selectedColor ?? Colors.red.value),
+                          color: Color(BlocProvider.of<CategoryBloc>(context)
+                                  .selectedColor ??
+                              Colors.red.value),
                         ),
                       ),
                     ),
@@ -144,7 +156,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       return;
                     }
 
-                    BlocProvider.of<CategoryBloc>(context).add(AddOrUpdateCategoryEvent(isAddCategory));
+                    BlocProvider.of<CategoryBloc>(context)
+                        .add(AddOrUpdateCategoryEvent(isAddCategory));
                   },
                   title: isAddCategory ? context.loc.add : context.loc.update,
                 ),
@@ -153,7 +166,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           ),
           tablet: Scaffold(
             appBar: context.materialYouAppBar(
-              isAddCategory ? context.loc.addCategory : context.loc.updateCategory,
+              isAddCategory
+                  ? context.loc.addCategory
+                  : context.loc.updateCategory,
             ),
             bottomNavigationBar: SafeArea(
               child: Padding(
@@ -165,7 +180,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                       return;
                     }
 
-                    BlocProvider.of<CategoryBloc>(context).add(AddOrUpdateCategoryEvent(isAddCategory));
+                    BlocProvider.of<CategoryBloc>(context)
+                        .add(AddOrUpdateCategoryEvent(isAddCategory));
                   },
                   title: isAddCategory ? context.loc.add : context.loc.update,
                 ),
@@ -182,7 +198,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                         children: [
                           const CategoryIconPickerWidget(),
                           SetBudgetWidget(controller: budgetController),
-                          ColorPickerWidget(categoryBloc: BlocProvider.of<CategoryBloc>(context)),
+                          ColorPickerWidget(
+                              categoryBloc:
+                                  BlocProvider.of<CategoryBloc>(context)),
                         ],
                       ),
                     ),
@@ -223,7 +241,8 @@ class CategoryNameWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterCategory,
       keyboardType: TextInputType.name,
-      onChanged: (value) => BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
+      onChanged: (value) =>
+          BlocProvider.of<CategoryBloc>(context).categoryTitle = value,
       validator: (value) {
         if (value!.isNotEmpty) {
           return null;
@@ -249,7 +268,8 @@ class CategoryDescriptionWidget extends StatelessWidget {
       controller: controller,
       hintText: context.loc.enterDescription,
       keyboardType: TextInputType.name,
-      onChanged: (value) => BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
+      onChanged: (value) =>
+          BlocProvider.of<CategoryBloc>(context).categoryDesc = value,
     );
   }
 }

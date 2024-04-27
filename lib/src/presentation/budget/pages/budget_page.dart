@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:sika_purse/src/data/budget/store_cats.dart';
 import '../../../domain/expense/entities/expense.dart';
+import '../../category/bloc/category_bloc.dart';
 import '../../summary/controller/summary_controller.dart';
 
 import '../../../../main.dart';
@@ -21,31 +24,53 @@ class BudgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SikaPurseAnnotatedRegionWidget(
-      color: context.background,
-      child: ValueListenableBuilder<Box<CategoryModel>>(
-        valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
-        builder: (_, value, child) {
-          final categories = value.values.toBudgetEntities();
-          if (categories.isEmpty) {
-            return EmptyWidget(
-              icon: MdiIcons.timetable,
-              title: context.loc.emptyBudgetMessageTitle,
-              description: context.loc.emptyBudgetMessageSubTitle,
+    final bloc = getIt.get<CategoryBloc>();
+
+    final budgetCategories =
+        Provider.of<BudgetCategories>(context, listen: false);
+
+    return Scaffold(
+      body: SikaPurseAnnotatedRegionWidget(
+        color: context.background,
+        child: ValueListenableBuilder<Box<CategoryModel>>(
+          valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
+          builder: (_, value, child) {
+            // print(_);
+            // print(value.values);
+            // print(child);
+            final categories = value.values.toBudgetEntities();
+
+            final categoriesNonBudget = value.values.toNonBudgetEntities();
+
+            budgetCategories.setBudgetCategories(categories);
+            budgetCategories.setNonBudgetCategories(categoriesNonBudget);
+
+            // print(cat);
+
+            if (categories.isEmpty) {
+              return EmptyWidget(
+                icon: MdiIcons.timetable,
+                title: context.loc.emptyBudgetMessageTitle,
+                description: context.loc.emptyBudgetMessageSubTitle,
+              );
+            }
+            return ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                final Category category = categories[index];
+                print(category);
+                final List<Expense> expenses = summaryController
+                    .fetchExpensesFromCategoryId(category.superId!)
+                    .thisMonthExpensesList;
+                print(expenses.totalExpense);
+                return BudgetItem(category: category, expenses: expenses);
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
             );
-          }
-          return ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final Category category = categories[index];
-              final List<Expense> expenses =
-                  summaryController.fetchExpensesFromCategoryId(category.superId!).thisMonthExpensesList;
-              return BudgetItem(category: category, expenses: expenses);
-            },
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
-          );
-        },
+          },
+        ),
       ),
     );
   }
@@ -64,7 +89,8 @@ class BudgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double totalExpenses = expenses.totalExpense;
-    final double totalBudget = (category.finalBudget == 0.0 ? 1 : category.finalBudget);
+    final double totalBudget =
+        (category.finalBudget == 0.0 ? 1 : category.finalBudget);
     double difference = category.finalBudget - totalExpenses;
 
     return ListTile(
@@ -127,7 +153,8 @@ class BudgetItem extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency()}',
+                        text:
+                            ' ${(difference < 0 ? 0.0 : difference).toFormateCurrency()}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],

@@ -12,6 +12,7 @@
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true">
+        <service android:name="com.f2fk.geofence_foreground_service.GeofenceForegroundService" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

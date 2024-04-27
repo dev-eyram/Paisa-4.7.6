@@ -31,6 +31,12 @@ extension CategoryModelsHelper on Iterable<CategoryModel> {
           .where((element) => element.isBudget)
           .sorted((a, b) => a.name.compareTo(b.name))
           .toList();
+
+  List<Category> toNonBudgetEntities() =>
+      map((categoryModel) => categoryModel.toEntity())
+          .where((element) => element.isBudget != true)
+          .sorted((a, b) => a.name.compareTo(b.name))
+          .toList();
 }
 
 extension CategoryHelper on Category {

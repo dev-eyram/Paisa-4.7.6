@@ -79,7 +79,10 @@ class HomeMobilePage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is CurrentIndexState &&
-              (state.currentPage == 4 || state.currentPage == 5 || state.currentPage == 6 || state.currentPage == 7)) {
+              (state.currentPage == 4 ||
+                  state.currentPage == 5 ||
+                  state.currentPage == 6 ||
+                  state.currentPage == 7)) {
             return const SizedBox.shrink();
           }
           return Theme(
@@ -90,7 +93,8 @@ class HomeMobilePage extends StatelessWidget {
               elevation: 1,
               backgroundColor: context.surface,
               selectedIndex: homeBloc.selectedIndex,
-              onDestinationSelected: (index) => homeBloc.add(CurrentIndexEvent(index)),
+              onDestinationSelected: (index) =>
+                  homeBloc.add(CurrentIndexEvent(index)),
               destinations: destinations
                   .sublist(0, 5)
                   .map((e) => NavigationDestination(

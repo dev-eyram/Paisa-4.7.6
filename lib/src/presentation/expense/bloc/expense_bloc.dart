@@ -4,6 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sika_purse/main.dart';
+import 'package:sika_purse/src/core/extensions/category_extension.dart';
+import 'package:sika_purse/src/core/extensions/expense_extensions.dart';
+import 'package:sika_purse/src/presentation/category/bloc/category_bloc.dart';
+import 'package:sika_purse/src/presentation/summary/controller/summary_controller.dart';
 
 import '../../../core/enum/recurring_type.dart';
 import '../../../core/enum/transaction_type.dart';
@@ -186,6 +191,45 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
           ..description = description;
         await updateExpensesUseCase(currentExpense!);
       }
+
+      if (transactionType == TransactionType.expense) {
+        final categoryBloc =
+            getIt.get<CategoryBloc>(); //Getting the Category Bloc Instance
+
+        final expensesBlock =
+            getIt.get<SummaryController>(); //Getting the Expenses Bloc Instance
+
+        Category? category = categoryBloc.getCategoryUseCase(
+            categoryId); //Getting the Category Data from the Category ID
+        List<Expense> expenses = expensesBlock.fetchExpensesFromCategoryId(
+            categoryId); //Getting the Category Expenses Data from the Category ID
+
+        if (category?.isBudget == true) {
+          // do the below only if the category is a budgetted category
+
+          if (category?.budget != null &&
+              category!.budget! >
+                  0) // Check if the budget anount is not null or 0
+          {
+            if (expenses.totalExpense >
+                category
+                    .budget!) //Show the notification only if the expenses is greater than the budegt
+
+            {
+              emit(const ExpenseExceeded(isExceeded: true));
+              return;
+            }
+          }
+        }
+
+        // print(categoryId);
+        // print(category);
+        // print(category?.isBudget);
+        // print(category?.budget);
+        // print(category?.finalBudget);
+        // print(expenses.totalExpense);
+      }
+
       emit(ExpenseAdded(isAddOrUpdate: event.isAdding));
     }
   }

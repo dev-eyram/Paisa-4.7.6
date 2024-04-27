@@ -132,12 +132,14 @@ class TransactionToggleButtons extends StatelessWidget {
               children: [
                 SikaPursePillChip(
                   title: TransactionType.expense.stringName(context),
-                  isSelected: recurringCubit.transactionType == TransactionType.expense,
+                  isSelected:
+                      recurringCubit.transactionType == TransactionType.expense,
                   onPressed: () => _update(TransactionType.expense),
                 ),
                 SikaPursePillChip(
                   title: TransactionType.income.stringName(context),
-                  isSelected: recurringCubit.transactionType == TransactionType.income,
+                  isSelected:
+                      recurringCubit.transactionType == TransactionType.income,
                   onPressed: () => _update(TransactionType.income),
                 ),
               ],
@@ -182,7 +184,8 @@ class SelectedAccount extends StatelessWidget {
             AccountSelectedWidget(
               accounts: accounts,
               onSelected: (selectedId) {
-                BlocProvider.of<RecurringCubit>(context).selectedAccountId = selectedId;
+                BlocProvider.of<RecurringCubit>(context).selectedAccountId =
+                    selectedId;
               },
             )
           ],
@@ -252,7 +255,12 @@ class _AccountSelectedWidgetState extends State<AccountSelectedWidget> {
 }
 
 class SelectCategory extends StatelessWidget {
-  const SelectCategory({Key? key}) : super(key: key);
+  final Function(dynamic)? onGetSelected;
+
+  const SelectCategory({
+    Key? key,
+    this.onGetSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -276,13 +284,72 @@ class SelectCategory extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 context.loc.selectCategory,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             CategorySelectWidget(
               categories: categories,
               onSelected: (int selectedId) {
-                BlocProvider.of<RecurringCubit>(context).selectedCategoryId = selectedId;
+                onGetSelected != null
+                    ? onGetSelected!(selectedId)
+                    : BlocProvider.of<RecurringCubit>(context)
+                        .selectedCategoryId = selectedId;
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+class SelectNonBudgetCategory extends StatelessWidget {
+  final Function(dynamic)? onGetSelected;
+
+  const SelectNonBudgetCategory({
+    Key? key,
+    this.onGetSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<Box<CategoryModel>>(
+      valueListenable: getIt.get<Box<CategoryModel>>().listenable(),
+      builder: (context, value, child) {
+        final List<Category> categories = value.values.toNonBudgetEntities();
+        if (categories.isEmpty) {
+          return ListTile(
+            onTap: () => context.pushNamed(addCategoryPath),
+            title: Text(context.loc.addCategoryEmptyTitle),
+            subtitle: Text(context.loc.addCategoryEmptySubTitle),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+          );
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                context.loc.selectCategory,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            CategorySelectWidget(
+              categories: categories,
+              onSelected: (int selectedId) {
+                onGetSelected != null
+                    ? onGetSelected!(categories.firstWhere(
+                        (category) => category.superId == selectedId))
+                    : BlocProvider.of<RecurringCubit>(context)
+                        .selectedCategoryId = selectedId;
               },
             )
           ],
@@ -347,7 +414,10 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                       color: context.primary,
                     ),
                   ),
-                  labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(color: context.onSurfaceVariant),
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(color: context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -364,7 +434,9 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                     });
                   },
                   avatar: Icon(
-                    color: category.superId == selectedId ? context.primary : context.onSurfaceVariant,
+                    color: category.superId == selectedId
+                        ? context.primary
+                        : context.onSurfaceVariant,
                     IconData(
                       category.icon,
                       fontFamily: fontFamilyName,
@@ -381,8 +453,10 @@ class _CategorySelectWidgetState extends State<CategorySelectWidget> {
                   showCheckmark: false,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   label: Text(category.name),
-                  labelStyle: context.titleMedium
-                      ?.copyWith(color: category.superId == selectedId ? context.primary : context.onSurfaceVariant),
+                  labelStyle: context.titleMedium?.copyWith(
+                      color: category.superId == selectedId
+                          ? context.primary
+                          : context.onSurfaceVariant),
                   padding: const EdgeInsets.all(12),
                 ),
               );
@@ -421,7 +495,8 @@ class RecurringNameWidget extends StatelessWidget {
             return context.loc.validName;
           }
         },
-        onChanged: (value) => BlocProvider.of<RecurringCubit>(context).recurringName = value,
+        onChanged: (value) =>
+            BlocProvider.of<RecurringCubit>(context).recurringName = value,
       ),
     );
   }
@@ -479,11 +554,13 @@ class RecurringDatePickerWidget extends StatefulWidget {
   });
 
   @override
-  State<RecurringDatePickerWidget> createState() => _RecurringDatePickerWidgetState();
+  State<RecurringDatePickerWidget> createState() =>
+      _RecurringDatePickerWidgetState();
 }
 
 class _RecurringDatePickerWidgetState extends State<RecurringDatePickerWidget> {
-  late final RecurringCubit recurringCubit = BlocProvider.of<RecurringCubit>(context);
+  late final RecurringCubit recurringCubit =
+      BlocProvider.of<RecurringCubit>(context);
 
   late DateTime selectedDateTime = recurringCubit.selectedDate;
 
@@ -595,22 +672,26 @@ class RecurringWidget extends StatelessWidget {
                   children: [
                     SikaPursePillChip(
                       title: RecurringType.daily.name(context),
-                      isSelected: recurringCubit.recurringType == RecurringType.daily,
+                      isSelected:
+                          recurringCubit.recurringType == RecurringType.daily,
                       onPressed: () => _update(RecurringType.daily),
                     ),
                     SikaPursePillChip(
                       title: RecurringType.weekly.name(context),
-                      isSelected: recurringCubit.recurringType == RecurringType.weekly,
+                      isSelected:
+                          recurringCubit.recurringType == RecurringType.weekly,
                       onPressed: () => _update(RecurringType.weekly),
                     ),
                     SikaPursePillChip(
                       title: RecurringType.monthly.name(context),
-                      isSelected: recurringCubit.recurringType == RecurringType.monthly,
+                      isSelected:
+                          recurringCubit.recurringType == RecurringType.monthly,
                       onPressed: () => _update(RecurringType.monthly),
                     ),
                     SikaPursePillChip(
                       title: RecurringType.yearly.name(context),
-                      isSelected: recurringCubit.recurringType == RecurringType.yearly,
+                      isSelected:
+                          recurringCubit.recurringType == RecurringType.yearly,
                       onPressed: () => _update(RecurringType.yearly),
                     ),
                   ],
